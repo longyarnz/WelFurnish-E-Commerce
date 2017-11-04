@@ -1,4 +1,5 @@
 import UploadFileMethod from './UploadFileMethod';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 import Ajax from './components/Ajax';
 import {
   Environment,
@@ -28,6 +29,10 @@ function fetchQuery(
   }).then(response => {
     return response.json();
   });
+}
+
+function setupSubscription(config, variables, cacheConfig, observer){
+  
 }
 
 const network = Network.create(fetchQuery);
