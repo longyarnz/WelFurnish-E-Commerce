@@ -32,10 +32,14 @@ function fetchQuery(
 }
 
 function setupSubscription(config, variables, cacheConfig, observer){
-  
+  const query = config.text;
+  const client = new SubscriptionClient('ws://127.1.1.1/ws', {reconnect: true});
+  client.subscribe({query, variables}, (error, result) => {
+    observer.onNext({ data: result })
+  });
 }
 
-const network = Network.create(fetchQuery);
+const network = Network.create(fetchQuery, setupSubscription);
 const source = new RecordSource();
 const store = new Store(source);
 export default new Environment({ network, store });
