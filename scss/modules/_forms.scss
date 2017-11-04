@@ -1,0 +1,117 @@
+form{
+	width : 100%;
+	min-height: 150px;
+	text-align: left;
+	padding: 4px 20px 30px;
+	outline: none $force;
+	
+	div{
+		position: relative;
+		margin: 20px 0px;
+		overflow: visible;
+
+		input, textarea{
+			padding: 0px 5px;
+			color: #000;
+			outline: none $force;
+			width: 100%;
+			font-family: Montserrat, lt;
+			border: 1px solid #a9a9a9;
+			box-shadow: none;
+
+			&.custom-order, &.checkout-form{
+				width: 80%;
+				text-align: left;
+				font-weight: 300;
+				font-size: 80%;
+				padding-bottom: 2px;
+
+				@media screen and (max-width: $tbl) {
+			    width: 100%;
+			    height: 32px;
+			  }
+			}
+
+			&.checkout-form{
+				width: 100%;
+				font-size: 100%;
+			}
+
+			&.proxy{
+				color: #000;
+				font-family: Montserrat, lt, arial, sans-serif;
+				cursor: default;
+
+				&::placeholder{
+					color: #bc0000;
+					font-weight: 700;
+				}
+			}
+
+			&[type='file']{
+				display: none
+			}
+		}
+
+		textarea{
+			padding: 10px 5px;
+
+			&.custom-order, &.checkout-form{
+				@media screen and (max-width: $tbl) {
+			    height: auto;
+			    border: 1px solid #a9a9a9;
+			  }
+		  }
+		}
+
+		&.big-view{
+			display: inline-block;
+
+			@media screen and (max-width: $tbl) {
+		    width: 100%;
+		  }
+		}
+
+		&:first-of-type{
+			margin-top: 0;
+		}
+
+		&:focus, &:hover{
+			outline: none $force;
+			border: initial;
+		}
+
+		&.proxy{
+			overflow: visible;
+		}
+	}
+
+	&.custom-order{
+		@media screen and (min-width: $pad-min) {
+  		padding-bottom: 0px;
+  	}
+	}
+}
+
+input{
+	height: 40px;
+	padding: 5px;
+	text-align: left;
+	border: 1px solid #a9a9a9;
+	outline: none $force;
+	font-family: Montserrat, lt;
+	font-weight: 300;
+	box-shadow: none;
+
+	&.paginator{
+		padding: 0px 2px 1px;
+    width: 60%;
+    height: 20px;
+    border-right: none;
+    box-shadow: none;
+  }
+
+  @media screen and (max-width: $tbl) {
+		text-align: center;
+	}
+}

@@ -1,0 +1,514 @@
+button{
+	font-family: Montserrat, rg;
+	cursor: pointer;
+	position: relative;
+	outline: none;
+
+	&.landing-panel{
+		padding: 10px 20px;
+		background-color: $color;
+		font-weight: 100;
+		font-family: Montserrat, lt;
+		font-size: 200%;
+		margin-left: 20px;
+		margin-top: 50px;
+		border: none;
+		color: #fff;
+		overflow: hidden;
+
+		&::before{
+			content: "START";
+			position: relative;
+			top: 0px;
+			left: 0;
+			right: 0;
+			transition: all .2s ease-out;
+		}
+
+		&::after{
+			content: "\f218";
+			font-family: FontAwesome;
+			font-size: 100%;
+			position: absolute;
+			top: 110%;
+			padding: 4px 10px;
+			text-align: center;
+			left: 30%;
+			right: auto;
+			transition: all .2s ease-out;
+		}
+
+		&:hover{
+			&::before{
+				top: -50px;
+			}
+
+			&::after{
+				top: 20%;
+			}
+		}
+
+		@media screen and (max-width: $tbl) {
+	    font-size: 80%;
+	    font-weight: 300;
+	  }
+	}
+
+	&.navigator{
+		width: 50%;
+		background-color: $color;
+		color: #fff;
+		border: none;
+		font-size: 95%;
+		padding: 20px 10px;
+
+		&:focus, &:hover, &:active{
+			background-color: lighten($color, 8%);
+			box-shadow: inset 0px 2px 4px rgba(#000, .4);
+			transition: box-shadow .1s ease;
+		}
+
+		@media screen and (max-width: $sm) {
+			font-size: 90%;
+			padding: 13px;
+		}
+	}
+
+	&.side-panel, &.cart-button, &.mobile-panel{
+		position: relative;
+		width: 86.2%;
+		padding: 15px;
+		margin-left: 20px;
+		display: block;
+		background-color: $base;
+		border: 1px solid transparent;
+		overflow: hidden;
+		outline: none $force;
+		transition: all .1s ease-out;
+
+		span{
+			display: inline-block;
+			color: #000;
+			overflow-y: visible;
+
+			b{
+				padding: 4px 7px;
+				background-color: $color;
+				margin-left: 3px;
+				color: #fff;
+			}
+
+			&:nth-of-type(1){
+				width: 100%;
+			}
+
+			&:nth-of-type(2){
+				margin-right: 10px;
+			}
+		}
+
+		&::after{
+			content: "";
+			position: absolute;
+			width: 100%;
+			background-color: darken($base, 15%);
+			top: -1px;
+			left: 100%;
+			height: 48px;
+			z-index: 2;
+		}
+
+		&:hover{
+			box-shadow: 0px 8px 8px -8px rgba(#000, .8);
+
+			&::after{
+				left: 0%;
+				opacity: 0;
+				transition: all .8s ease-out;
+			}
+		}
+
+		&:active{
+			box-shadow: none;
+		}
+	}
+
+	&.mobile-panel{
+		margin: 30px auto;
+		font-size: 100%;
+		padding: 20px;
+
+		@media screen and (max-width: $sm) {
+			font-size: 80%;
+			margin: 17px auto;
+		}
+	}
+
+	&.big-view, &.custom-order, &.checkout-form, &.print-page{
+		padding: 10px;
+		overflow: hidden;
+		border: 1px solid #a9a9a9;
+		background-color: #fff;
+		margin-right: 30px;
+
+		&::after{
+			content: "";
+			position: absolute;
+			width: 100%;
+			background-color: darken($base, 20%);
+			top: 0%;
+			left: 100%;
+			height: 38px;
+			z-index: 2;
+		}
+
+		&:hover{
+			box-shadow: 0px 4px 4px -2px rgba(#000, .2);
+
+			&::after{
+				left: 0%;
+				opacity: 0;
+				transition: all .5s ease-out;
+
+				@media screen and (max-width: $tbl) {
+			  	display: none;
+			  }
+			}
+		}
+
+		&:active{
+			box-shadow: none;
+			color: #fff;
+			background-color: $color;
+		}
+
+		@media screen and (max-width: $tbl) {
+			width: 70%;
+			display: block;
+			margin: 20px auto;
+		}
+	}
+
+	&.custom-order{
+		@media screen and (max-width: $tbl) {
+	    width: 70%;
+	    margin: 0px auto;
+	  }
+	}
+
+	&.print-page{
+		@extend .no-print;
+		margin: 0px 10px;
+
+		@media screen and (max-width: $tbl) {
+			margin: 10px auto;		
+		}
+	}
+
+	&.proxy{
+		padding: 5px;
+		color: gray;
+		outline: none $force;
+		width: 80%;
+		text-align: left;
+		font-family: Montserrat, rg;
+		background-color: #fff;
+		min-height: 40px;
+		line-height: 1.6;
+		box-shadow: 0px 6px 8px -4px rgba(#000, .1);
+		border: 1px solid #fff;
+		font-weight: 400;
+		transition: all .1s ease-out;
+
+		span i{
+			color: #bc0000;
+
+			@media screen and (max-width: $tbl) {
+				font-size: 80%;
+			}
+		}
+
+		&::before{
+			content: "\f093";
+			font-family: FontAwesome;
+			margin-right: 10px;
+		}
+
+		&:hover{
+			color: #000;
+			box-shadow: 0px 6px 18px -4px rgba(#000, .2);
+		}
+
+		&:active{
+			box-shadow: 0px 4px 2px -4px rgba(#000, .4);
+		}
+
+		@media screen and (max-width: $tbl) {
+	    width: 100%;
+	    font-family: Montserrat, lt;
+	    font-weight: 300;
+	  }
+	}
+}
+
+div.select-button{
+	position: relative;
+	width: 13%;
+	height: 13px;
+	overflow: visible;
+	display: inline-block;
+	vertical-align: middle;
+	float: right;
+	border-radius: 20px;
+	border-top: 2px solid #fff;
+
+	div{
+		width: 19px;
+		height: 19px;
+		border-radius: 100%;
+		position: absolute;
+		top: -4px;
+		vertical-align: middle;
+	}
+
+	&::selection{
+		background-color: initial;
+	}
+
+	@media screen and (max-width: $tbl) {
+    width: 5%;
+  }
+
+	@media screen and (max-width: $sm) {
+    width: 15%;
+  }
+}
+
+.select-button.off{
+	animation: off 1s ease both;
+}
+
+.inner-off{
+	animation: inner-off .2s ease-out both;
+
+	@media screen and (max-width: $tbl) {
+    animation: inner-off-sm .2s ease-out both;
+  }
+}
+
+.select-button.on{
+	animation: on 1s ease both;
+}
+
+.inner-on{
+	animation: inner-on .2s ease-out both;
+
+	@media screen and (max-width: $tbl) {
+    animation: inner-on-sm .2s ease-out both;
+  }
+}
+
+span.paginator{
+	position: absolute;
+	display: inline-block;
+	padding: 10px;
+	height: 36px;
+	cursor: pointer;
+	font-family: Montserrat, lt;
+	font-weight: 300;
+	font-size: 80%;
+	background-color: #fff;
+	top: 0;
+	box-shadow: 0px 2px 4px rgba(#000, .3);
+	overflow: hidden;
+
+	&::selection{
+		background-color: initial;
+	}
+
+	&:first-child{
+		left: 0;
+
+		&::before{
+			content: "Previous";
+			position: relative;
+			top: 0;
+			left: 0;
+			right: 0;
+			transition: all .2s ease-out;
+		}
+
+		&::after{
+			content: "\f053";
+			font-family: FontAwesome;
+			font-size: 80%;
+			position: absolute;
+			padding: 4px 10px;
+			text-align: center;
+			left: 120%;
+			right: auto;
+			transition: all .2s ease-out;
+		}
+
+		&:hover{
+			&::before{
+				left: -120px;
+			}
+
+			&::after{
+				left: 0;
+				right: 0;
+			}
+		}
+	}
+
+	&:nth-of-type(2){
+		right: 0;
+
+		&::after{
+			content: "Next";
+			position: relative;
+			top: 0;
+			left: 0;
+			right: 0;
+			transition: all .17s ease-in;
+		}
+
+		&::before{
+			content: "\f054";
+			font-family: FontAwesome;
+			font-size: 80%;
+			position: absolute;
+			padding: 4px 10px;
+			text-align: center;
+			right: 130%;
+			left: auto;
+			transition: all .17s ease-in;
+		}
+
+		&:hover{
+			&::after{
+				left: 132%;
+			}
+
+			&::before{
+				right: 10px;
+			}
+		}
+	}
+
+	&:last-child{
+		position: relative;
+		left: 0;
+		right: 0;
+		margin: 0px;
+		padding: 7.5px;
+		transition: all .1s ease-out;
+
+		i{
+			display: inline-block;
+			border: 1px solid #a9a9a9;
+			border-left: none;
+			height: 20px;
+			vertical-align: bottom;
+			padding: 3px 3px 0px;
+			margin-right: 5px;
+			color: rgb(128, 128, 128);
+
+			&:hover{
+				color: $brand-success;
+			}
+
+			&:active{
+				color: #fff;
+				background-color: $brand-success;
+			}
+		}
+
+		b{
+			background-color: $color;
+			padding: 3px 8px;
+			color: #fff;
+
+			&::selection{
+				background-color: initial;
+			}
+		}
+
+		&:focus, &:hover{
+			box-shadow: 0px 8px 16px -4px rgba(#000, .4);
+		}
+	}
+
+	&:active{
+		box-shadow: none;
+	}
+
+	&.custom-order{
+		display: inline-block;
+		position: relative;
+		width: 30%;
+		height: 48px;
+		text-align: center;
+		padding: 5px;
+		background: purple;
+		border-radius: 10px;
+		border: 2px #fff solid;
+		font-family: Montserrat;
+		font-size: 100%;
+		margin: 0 50px;
+		color: #fff;
+		cursor: pointer;
+		overflow: hidden;
+
+		&:focus, &:active{
+			outline: 0 $force;
+		}
+	}
+}
+
+span.checkout-button{
+	position: absolute;
+	border: none;
+	background-color: transparent;
+	color: #fff;
+	top: 0px;
+
+	i{
+		display: inline-block;
+		font-size: 250%;
+		position: absolute;
+		top: 39px;
+		left: -19px;
+
+		@media screen and (max-width: $sm) {
+	    top: 22px;
+			left: -10px;
+			font-size: 130%;
+	  }
+	}
+
+	span.badge{
+		position: absolute;
+		display: inline-block;
+		color: #fff;
+		top: 8px;
+		left: -5px;
+		padding: 2px;
+		font-weight: 400;
+		font-family: Montserrat, rg;
+		font-size: 140%;
+		text-align: center;
+
+		@media screen and (max-width: $sm) {
+	    top: 4px;
+			left: -4px;
+			font-size: 75%;
+	  }
+	}
+
+	&:focus, &:hover, &:active{
+		background-color: transparent $force;
+		outline: none $force;
+	}
+}

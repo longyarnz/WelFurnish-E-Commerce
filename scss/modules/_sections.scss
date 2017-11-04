@@ -1,0 +1,586 @@
+section{
+	width: 100% $force;
+	text-align: left;
+	position: relative;
+	overflow: hidden;
+
+	&.landing-panel{
+		@extend .no-print;
+		background: url('../../src/files/20.jpg');
+		background-size: cover;
+		z-index: 4;
+
+		div.dk-bg{
+			width: 100%;
+			height: 100%;
+			background: rgba(#000, .8);
+			overflow: hidden;
+		}
+
+		@media screen and (orientation: portrait) {
+			background: url('../../src/files/21.jpg');
+			background-size: cover;
+		}
+	}	
+
+	&.shop-area{
+		width: 100%;
+		padding-top: 6px;
+		padding-bottom: 4px;
+		position: relative;
+		overflow-y: hidden;
+		background-color: $base;
+
+		@media screen and (max-width: $tbl) {
+      padding-top: 0px;
+      overflow: visible;
+      background-color: #f2f2f2;
+    }
+
+    div.checkout-button{
+    	position: fixed;
+    	z-index: 1;
+    	bottom: 5%;
+    	right: 5%;
+    	padding: 50px;
+    	border-radius: 50%;
+    	border: 1px solid $color;
+    	background-color: $color;
+    	transition: all .1s ease-in;
+    	box-shadow: 0px 10px 16px -4px rgba(#000, .3);
+
+    	&:focus, &:hover{
+    		box-shadow: 0px 16px 12px -4px rgba(#000, .3);
+    	}
+
+    	&:active{
+    		box-shadow: 0px 8px 12px -4px rgba(#000, 1);
+    	}
+
+    	@media screen and (min-width: $pad-min) {
+    		display: none;
+    	}
+
+    	@media screen and (max-width: $sm) {
+		    padding: 25px;
+		  }
+    }
+	}
+
+	&.cart-section{
+		padding-left: 15px;
+		padding-top: 20px;
+		background-color: $base;
+
+		div.paginator{
+			width: 93.4%;
+			margin: 15px 0px 20px 20px;
+			height: 40px;
+			position: relative;
+			overflow: visible;
+			text-align: center;
+
+			@media screen and (max-width: $tbl) {
+	    	display: none;
+	    }
+		}
+
+		div.no-items{
+			@extend div.paginator;
+			font-family: Montserrat;
+			font-weight: 700;
+			color: #bdbdbd;
+			font-size: 150%;
+			padding: 10% 0px 15%;
+
+			i{
+				display: block;
+				font-size: 300%;
+				padding:10px 0px 40px;
+			}
+
+			@media screen and (max-width: $tbl) {
+	    	width: 100%;
+	    	font-size: 150%;
+	    	display: block;
+	    	padding: 0px;
+	    	height: auto;
+	    	margin: 190px 0px 0px;
+	    }
+
+	    @media screen and (max-width: $sm) {
+	    	font-size: 100%;
+	    	padding: 0px;
+	    	margin: 50px 0px 0px;
+	    }
+		}
+
+		@media screen and (max-width: $tbl) {
+	    padding: 90px 10px 0px;
+	  }
+
+	  @media screen and (max-width: $sm) {
+	    padding: 50px 10px 0px;
+	  }
+	}
+
+	&.big-view{
+		background-color: $base;
+		padding: 5% 30px 3%;
+		overflow-y: visible;
+
+		p.form-message{
+			font-size: 90%;
+			font-family: Montserrat, lt, arial;
+			font-weight: 300;
+			padding: 20px;
+			background-color: #fff;
+			width: 50%;
+			line-height: 1.8;
+			box-shadow: 0px 2px 4px rgba(#000, .3);
+
+			span{
+				color: $color;
+				font-weight: 700;
+			}
+
+			i{
+				display: block;
+				font-size: 300%;
+				margin: 20px 0px;
+				color: $brand-success;
+				text-align: center;
+			}
+
+			@media screen and (max-width: $tbl) {
+				width: calc(100% - 20px);
+				margin: 0px 10px;
+			}
+		}
+
+		span.back{
+			font-family: Montserrat, rg;
+			font-weight: 400;
+			font-size: 80%;
+			cursor: pointer;
+			padding: 5px;
+			padding-left: 0px;
+			margin: 0px;
+			margin-right: 10px;
+			transition: all .2s ease-out;
+
+			&::before{
+				content: "\f053";
+				font-family: FontAwesome;
+				margin-right: 10px;
+			}
+
+			&.home::before{
+				content: "\f015";
+			}
+
+			&:hover{
+				color: $color;
+			}
+
+			@media screen and (max-width: $tbl) {
+				display: none;
+			}
+		}
+
+		div.gallery{
+			position: relative;
+			width: 100%;
+			height: 200px;
+			overflow: hidden;
+			margin-top: 20px;
+
+			img{
+				@extend .image-alt;
+				position: absolute;
+				width: 354px;
+				height: 200px;
+				background-color: $base;
+				transition: all 1s ease;
+				overflow: hidden;
+
+				&.fade-in{
+					@extend .go-center;
+
+					@media screen and (max-width: $tbl) {
+						transform: none $force;
+					}
+				}
+
+				&.fade-out{
+					@extend .go-up;
+
+					@media screen and (max-width: $tbl) {
+						transform: none $force;
+					}
+				}
+
+				&:last-of-type{
+					@media screen and (max-width: $tbl) {
+						margin-bottom: 0px;
+					}
+				}
+
+				@media screen and (max-width: $tbl) {
+					width: calc(100% + 20px);
+					height: auto;
+					display: block $force;
+					position: relative;
+					margin: 10px 0px 30px;
+					top: 0; left: -10px;
+					margin-right: 0px;
+					transition: none;
+					margin-top: 0px;
+				}
+			}
+
+			@media screen and (max-width: $tbl) {
+				width: calc(100%);
+				padding: 10px;
+				height: auto;
+				margin-top: 0px;
+			}
+		}
+
+		div > small{
+			display: inline-block;
+			visibility: hidden;
+      padding: 2px 5px;
+      background-color: $brand-success;
+      font-size: 80%;
+      color: $base;
+      font-weight: 300;
+      font-family: Montserrat, lt;
+      vertical-align: middle;
+
+      @media screen and (min-width: $pad-min) {
+    		display: none $force;
+    	}
+		}
+
+		div p{
+			width: 90%;
+			font-family: Montserrat, lt, arial, sans-serif;
+			font-weight: 300;
+			color: lighten(#000, 20%);
+			font-size: 90%;
+			line-height: 1.7;
+
+			&:first-of-type{
+				text-align: left;
+			}
+
+			&:last-of-type{
+				font-size: 120%;
+				color: #bc0000;
+				font-weight: 700;
+				position: relative;
+				overflow: visible;
+
+				&::before{
+					content: "";
+					position: absolute;
+					width: 5%;
+					height: 5px;
+					background: $color;
+					top: -3px;
+					z-index: 2;
+
+					@media screen and (max-width: $tbl) {
+						width: 20%;
+						top: 0px;
+						left: 40%;
+						text-align: center;
+					}
+				}
+
+				@media screen and (max-width: $tbl) {
+					font-size: 100%;
+				}
+			}
+
+			@media screen and (max-width: $tbl) {
+        padding: 10px;
+        width: 100%;
+        margin: 5px 0px;
+      }
+	  }
+
+		&.custom{
+			width: 100%;
+			padding: 0px 40px;
+
+			@media screen and (max-width: $tbl) {
+        padding: 0px;
+        overflow: visible;
+      }
+		}
+
+		@media screen and (max-width: $tbl) {
+			text-align: center;
+			padding: 0px;
+		}
+	}
+
+	&.mobile-panel{
+		margin-top: 45px;
+		background-color: #fff;
+	}
+
+	&.checkout-panel, &.checkout-form, &.print-page{
+		background-color: $base;
+		padding: 3% 18%;
+		z-index: 4;
+		font-family: Montserrat, lt, arial, sans-serif;
+		font-weight: 300;
+		font-size: 80%;
+
+		h1 + span{
+			display: inline-block;
+			margin-bottom: 2%;
+			margin-left: 10px;
+		}
+
+		section.inner-pane { 
+			padding: 10px;
+			background-color: #fff;
+			box-shadow: $shadow;
+			transition: all .2s ease-in;
+
+			& > div{
+				background-color: darken(#fff, 0%);
+				position: relative;
+				transition: all .2s ease-in;
+				height: 75px;
+
+				&:last-of-type{
+					margin-bottom: 20px;
+				}
+
+				&:nth-of-type(odd){
+					background-color: $base;
+					box-shadow: inset $shadow;
+
+					@media screen and (max-width: $tbl) {
+						background-color: #fff;
+						box-shadow: none;
+					}
+				}
+
+				&:nth-of-type(even){
+					@media screen and (max-width: $tbl) {
+						background-color: $base;
+						box-shadow: inset $shadow;
+					}
+				}
+
+				&:first-of-type{
+					@media screen and (max-width: $tbl) {
+						display: none;		
+					}
+				}
+			}
+		}
+
+		@media screen and (max-width: $tbl) {
+			padding: 40px;
+		}
+
+		@media screen and (max-width: $sm) {
+			padding: 40px 10px 5px;
+		}
+	}
+
+	&.checkout-form{
+		padding: 3% 25%;
+
+		section.inner-pane{
+			@media screen and (max-width: $tbl) {
+				padding: 10px 0px 0px;
+			}
+		}
+
+		@media screen and (max-width: $tbl) {
+			padding: 40px;
+		}
+
+		@media screen and (max-width: $sm) {
+			padding: 0px;
+		}
+	}
+
+	&.print-page{
+		padding: 3% 18%;
+
+		section.inner-pane{
+			padding: 40px 5%;
+
+			img{
+				display: block;
+				background-color: #ccc;
+				padding: 10px;
+
+				@media screen and (max-width: $tbl) {
+					margin: auto;
+					padding: 5px;
+					width: 100%;
+				}	
+			}
+
+			div.banner{
+				display: inline-block;
+				width: 20%;
+				margin-bottom: 35px;
+				padding: 20px;
+				text-align: center;
+				font-size: 200%;
+				font-weight: 700;
+				font-family: Montserrat, bd;
+				background-color: #d9534f;
+				color: #fff;
+				overflow: hidden;
+				box-shadow: 0px 4px 4px -2px rgba(#000, .6);
+
+				@media screen and (max-width: $tbl) {
+			    font-size: 85%;
+			    width: 25%;
+			    margin-top: 10px;
+			    margin-bottom: 0px;
+			  }
+			}
+
+			div.center{
+				text-align: center;
+				padding: 10px;
+
+				@media screen and (max-width: $tbl) {
+					width: 100%;
+					box-shadow: none;
+					background-color: transparent;			
+				}
+			}
+
+			main{
+				display: block;
+				width: 100%;
+				margin: 20px 0px;
+
+				div{
+					width: 100%;
+					height: 30px;
+					overflow-y: hidden;
+					background-color: #fff;
+
+					span{
+						display: inline-block;
+						padding: 5px 30px;
+						height: 100%;
+						
+						&:first-of-type{
+							width: 65%;
+
+							@media screen and (max-width: $tbl) {
+								width: 100%;
+							}
+						}
+
+						&:last-of-type{
+							width: 35%;
+							border-left: 2px solid #fff;
+
+							@media screen and (max-width: $tbl) {
+								width: 100%;
+								border-left: none;
+								padding-left: 20px;
+								font-weight: 700;
+								font-family: Montserrat, bd, arial;
+							}
+						}
+
+						@media screen and (max-width: $tbl) {
+							height: auto;
+							padding: 5px;
+						}
+					}
+
+					&:first-of-type, &:last-of-type{
+						span{
+							font-size: 110%;
+							padding: 5px;
+							font-weight: 700;
+
+							&:last-of-type{
+								text-align: left;
+
+								@media screen and (max-width: $tbl) {
+									display: none;
+								}
+							}
+
+							@media screen and (max-width: $tbl) {
+								font-size: 105%;			
+							}
+						}
+					}
+
+					&:last-of-type{
+						span{
+							&:last-of-type{
+								@media screen and (max-width: $tbl) {
+									display: block;
+								}
+							}
+
+							&:first-of-type{
+								@media screen and (max-width: $tbl) {
+									font-weight: 300;
+									font-family: Montserrat, lt;
+								}
+							}
+						}
+					}
+
+					&:nth-of-type(odd){
+						span{
+							background-color: #ccc;
+						}
+					}
+
+					&:nth-of-type(2) span:first-of-type{
+						color: green;
+					}
+
+					@media screen and (max-width: $tbl) {
+						height: auto;
+					}
+				}
+
+				@media screen and (max-width: $tbl) {
+					
+				}
+			}
+
+			@media screen and (max-width: $tbl) {
+				// padding: 10px 0px 0px;
+			}
+
+			@media print {
+				box-shadow: none;
+			}
+		}
+
+		@media print {
+			background-color: #fff;
+			padding: 3%;
+		}
+
+		@media screen and (max-width: $tbl) {
+			padding: 0px;
+		}
+	}
+}

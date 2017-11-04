@@ -1,0 +1,129 @@
+.no-display{
+	@extend .no-transition;
+	display : none $force;
+}
+
+.go-left{
+	transform : translate(-100%, 0%) $force;
+	transition: all .65s ease-out $force;
+}
+
+.go-right{
+	transform : translate(102%, 0%) $force;
+	transition: all .65s ease-out;
+}
+
+.go-center{
+	transform : translate(0%, 0%) $force;
+	transition: all 1s ease-in $force;
+}
+
+.go-up{
+	transform : translate(0%, -100%) $force;
+	transition: transform 1s ease-out;
+}
+
+.go-down{
+	transform : translate(0%, 100%) $force;
+	transition: transform 1s ease-out;
+}
+
+.dim-opacity{
+	opacity: 0 $force;
+	z-index: -1 $force;
+	margin-top: 0 $force;
+	transition: all .5s ease-out;
+}
+
+.jack{
+	@extend .no-transition;
+	@extend .no-display;
+	@media screen and (max-width: $tbl) {
+		display: none;
+	}
+}
+
+.jill{
+	@extend .reload;
+	@extend .no-transition;
+}
+
+.show{
+	display: block $force;
+}
+
+.show-tile{
+	display: inline-block $force;
+	visibility: visible $force;
+}
+
+.image-alt{
+	&::before{
+		content: "";
+		font-family: FontAwesome;
+		font-size: 200%;
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		top: 45%;
+		left: 45%;
+		z-index: 1;
+		background-color: #fff;
+		border-top: 7px solid gray;
+		border-radius: 100%;
+		animation: fa-spin .5s linear infinite forwards;
+	}
+
+	&:hover{		
+		&::before{ border-top: 7px solid $color }
+	}
+
+	@media screen and (max-width: $sm) {
+    &::before{
+    	top: 31%;
+    	left: 35%;
+    }
+  }
+}
+
+.no-transition{
+	transition: none $force;
+}
+
+.no-print{
+	@media print {
+		display: none;
+	}
+}
+
+.reload{
+	animation: open .3s ease-out forwards;
+}
+
+.aload{
+	animation: open .3s ease-out forwards;
+}
+
+.show-tile{
+	animation: tile .2s ease-out;
+
+	@media screen and (max-width: $sm) {
+		animation: tile-sm .2s ease-out;
+	}
+}
+
+.remove-show-tile{
+	animation: remove-tile .2s ease-out backwards;
+
+	@media screen and (max-width: $tbl) {
+		animation: remove-tile-sm 1s ease backwards;
+	}
+}
+
+.delete{
+	animation: poof .1s ease-out forwards;
+}
+
+.delete-node{
+	animation: remove-node .8s ease-out forwards;
+}

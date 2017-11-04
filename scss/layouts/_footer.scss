@@ -1,0 +1,27 @@
+footer{
+	&.print-page{
+		text-align: center;
+		font-family: Montserrat;
+		padding: 5px;
+		font-weight: 300;
+		font-size: 70%;
+
+		span{
+			color: $color;
+		}
+	}
+
+	&.tile-container{
+		display: none;
+
+		@media screen and (max-width: $tbl) {
+			display: block;
+			font-family: Montserrat, lt;
+			font-weight: 200;
+			color: gray;
+			padding: 5px 5px 0px;
+			text-align: center;
+			font-size: 60%;
+		}
+	}
+}

@@ -1,0 +1,74 @@
+ul.shop-items, ul.filter-items{
+	position: relative;
+	font-family: Montserrat, lt, arial, sans-serif;
+	font-weight: 300;
+	font-size: 90%;
+	padding: 0px 20px;
+	margin-top: 0px;
+	list-style-type: none;
+
+	li{
+		padding: 5px;
+		cursor: pointer;
+		margin: 5px 0px;
+		color: lighten(#000, 50%);
+		font-weight: 300;
+		vertical-align: middle;
+
+		&.filter-items::before{
+			content: "<";
+		}
+
+		&.clicked{
+			color: $color $force;
+			font-family: Montserrat, rg, arial;
+			font-weight: 400;
+			background-color: $base $force;
+		}
+
+		&:hover{
+			color: $color $force;
+			font-family: Montserrat, rg, arial;
+			font-weight: 400;
+			background-color: #fff;
+		}
+
+		&:last-of-type{
+			border-bottom: none;
+		}
+
+		&:first-of-type{
+			margin-top: 20px;
+
+			@media screen and (max-width: $sm) {
+				margin-top: 0px;
+			}
+		}
+
+		@media screen and (max-width: $tbl) {
+			font-size: 80%;
+			margin: 0px;
+			border-bottom: 1px solid #eee;
+			padding: 20px 60px;
+		}
+
+		@media screen and (max-width: $sm) {
+			padding-left: 10px 30px;
+		}
+	}
+
+	@media screen and (max-width: $tbl) {
+		font-size: 120%;
+		padding: 0px;
+		margin: 0px;
+	}
+
+	@media screen and (max-width: $sm) {
+		font-size: 90%;
+	}
+}
+
+ul.shop-items li:active{
+	color: $color $force;
+	background-color: $base $force;
+}

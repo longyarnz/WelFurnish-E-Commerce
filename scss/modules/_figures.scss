@@ -1,0 +1,143 @@
+figure{
+	position: relative;
+	width: calc(100% / 3 - 50px);
+	height: 220px;
+	background-color: #fff;
+	margin: 10px 20px 30px;
+	float: left;
+	font-size: 90%;
+	overflow: hidden;
+	cursor: pointer;
+	transition: box-shadow .2s ease;
+	box-shadow: 0px 2px 4px rgba(#000, .3);
+
+	img{
+		@extend .image-alt;
+		@extend .no-transition;
+		width: 100%;
+		height: 140px;
+		position: relative;
+		display: block;
+		background-color: transparent;
+		overflow: hidden;
+
+		@media screen and (max-width: $tbl) {
+			width: 30%;
+			display: inline-block;
+			height: 100%;
+			vertical-align: top;
+			padding: 0px;
+			padding-right: 5px;
+		}
+	}
+
+	figcaption{
+		width: 100%;
+		padding: 10px;
+		font-family: Montserrat, rg, $font;
+		font-weight: 400;
+		color: lighten(#000, 50%);
+		white-space: nowrap;
+		text-overflow: ellipsis;
+
+		div{
+			margin-top: 5px;
+			font-size: 90%;
+			font-weight: 300;
+			font-family: Montserrat, lt, $font;
+			overflow: hidden;
+			text-overflow: inherit;
+		}
+
+		span{
+			position: relative;
+			font-weight: 400;
+			font-family: Montserrat, rg, $font;
+			margin-top: 5px;
+			font-size: 90%;
+			display: inline-block;
+			color: #bc0000;
+			vertical-align: text-top $force;
+
+			&:first-of-type{
+				font-weight: 700;
+				font-family: Montserrat, bd, $font;
+			}
+
+			i{
+				font-size: 140% $force;
+				vertical-align: text-top;
+			}
+
+			&:nth-of-type(2){
+				display: none;
+				position: absolute;
+				font-size: 70% $force;
+				right: 10px;
+				cursor: pointer;
+				clear: none;
+				padding: 2px 5px;
+	      background-color: $brand-success;
+	      color: #fff;
+	      font-weight: 300;
+	      font-family: Montserrat, lt, $font;
+
+	      @media screen and (max-width: $tbl) {
+					font-size: 80%;
+				}
+	    }
+		}
+
+		@media screen and (max-width: $tbl) {
+			width: 70%;
+			vertical-align: text-bottom;
+			display: inline-block;
+			padding: 5px;
+			padding-left: 0px;
+		}
+	}
+
+	&:hover{
+		box-shadow: 0px 4px 18px -4px rgba(#000, .4);
+
+		&::before{
+			border-top: 7px solid $color;
+		}
+
+		@media screen and (max-width: $tbl) {
+			box-shadow: 0px 4px 4px -2px rgba(#000, .2);
+		}
+	}
+
+	&:active{
+		box-shadow: 0px 2px 4px rgba(#000, .3);
+
+		@media screen and (max-width: $tbl) {
+			box-shadow: 0px 4px 4px -2px rgba(#000, .2);
+		}
+	}
+
+	&:first-of-type, &:nth-of-type(2){
+		@media screen and (max-width: $tbl) {
+	    margin-top: 0px;
+	  }
+
+	  @media screen and (max-width: $sm) {
+	    margin-top: 20px;
+	  }
+	}
+
+	@media screen and (max-width: $tbl) {
+    width: calc(50% - 20px);
+    margin: 20px 10px;
+    font-size: 80%;
+    height: 63px;
+    box-shadow: 0px 2px 4px rgba(#000, .2);
+  }
+
+  @media screen and (max-width: $sm) {
+  	width: 100%;
+  	margin: 20px 0px;
+  	float: none;
+  }
+}

@@ -1,0 +1,43 @@
+iframe{
+	width: 110% $force;
+
+	@media screen and (max-width: $tbl) {
+    width: 100% $force;
+  }
+}
+
+.fa{
+	cursor : pointer;
+}
+
+// @media screen and (max-width: $tbl) {
+// 	@font-face { 
+// 		font-family: bk;
+// 		src: url(../fonts/montserrat/Montserrat-Black.ttf) format('truetype');
+// 		font-style: normal;
+// 	}
+
+// 	@font-face { 
+// 		font-family: bd;
+// 		src: url(../fonts/montserrat/Montserrat-Bold.ttf) format('truetype');
+// 		font-style: normal;
+// 	}
+
+// 	@font-face { 
+// 		font-family: rg;
+// 		src: url(../fonts/montserrat/Montserrat-Regular.ttf) format('truetype');
+// 		font-style: normal;
+// 	}
+
+// 	@font-face { 
+// 		font-family: lt;
+// 		src: url(../fonts/montserrat/Montserrat-Light.ttf) format('truetype');
+// 		font-style: normal;
+// 	}
+
+// 	@font-face { 
+// 		font-family: tn;
+// 		src: url(../fonts/montserrat/Montserrat-Thin.ttf) format('truetype');
+// 		font-style: normal;
+// 	}
+// }

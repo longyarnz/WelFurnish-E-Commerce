@@ -1,0 +1,160 @@
+h1{
+	font-family: Montserrat, bd;
+
+	&.landing-panel{
+  	margin-top: 50px;
+  	margin-bottom: 0;
+    font-weight: 100;
+    color: #fff;
+    font-size: 280%;
+    padding: 5px;
+    background-color: transparent;
+    overflow-y: auto;
+    text-shadow: 2px 2px 8px $color;
+
+    @media screen and (max-width: $tbl) {
+      font-size: 150%;
+      line-height: 2.3;
+      font-weight: 100;
+      text-shadow: none;
+      margin-top: 20px;
+    }
+	}
+
+  &.big-view{
+    text-transform: uppercase;
+    font-size: 130%;
+
+    small{
+      display: none;
+      padding: 2px 5px;
+      background-color: $brand-success;
+      margin-left: 10px;
+      font-size: 50%;
+      color: #fff;
+      font-weight: 300;
+      font-family: Montserrat, lt;
+      vertical-align: middle;
+    }
+
+    &.caption{
+      display: none;
+
+      @media screen and (max-width: $tbl) {
+        display: block;
+        text-align: center;
+        margin-bottom: 5px;
+      }
+    }
+
+    &.custom-order{
+      @media screen and (min-width: $pad-min) {
+        margin-top: 35px;
+      }
+
+      @media screen and (max-width: $tbl) {
+        margin-bottom: 10px
+      }
+    }
+
+    &.title{
+      display: block;
+
+      @media screen and (max-width: $tbl) {
+        display: none;
+      }
+    }
+
+    @media screen and (max-width: $tbl) {
+      font-size: 120%;
+      font-weight: 700;
+    }
+  }
+
+  &.checkout-panel, &.checkout-form{
+    padding-left: 20px;
+    display: inline-block;
+    font-size: 165%;
+
+    @media screen and (max-width: $tbl) {
+      font-family: Montserrat, bd;
+      text-align: center;
+      font-size: 130%;
+      width: 100%;
+      margin: 10px 0px;
+      padding-left: 0px;
+    }
+  }
+}
+
+h3.side-panel{
+  font-family: Montserrat, rg;
+  font-weight: 400;
+  margin-bottom: 0px;
+  color: $color;
+  border-bottom: 1px solid #eee;
+  padding: 15px;
+  font-size: 95%;
+  padding-bottom: 7px;
+}
+
+h3.mobile-panel{
+  display: none;
+  font-family: Montserrat, rg;
+  font-weight: 400;
+  color: $color;
+  border-bottom: 1px solid #eee;
+  padding: 50px 30px 15px;
+  font-size: 115%;
+  margin-bottom: 0px;
+  margin-top: 20px;
+
+  @media screen and (max-width: $sm) {
+    display: none;
+    padding: 7px 15px;
+    font-size: 75%;
+  }
+}
+
+h3.landing-panel{
+  color: #fff;
+  font-weight: 100;
+  font-family: Montserrat, lt;
+  text-shadow: 2px 2px 8px $color;
+  font-size: 110%;
+
+  @media screen and (max-width: $tbl) {
+    position: absolute;
+    top: 80%;
+    font-size: 60%;
+    left: 0; right: 0;
+  }
+}
+
+h3.print-page, h4.print-page{
+  font-size: 130%;
+  font-weight: 700;
+  font-family: Montserrat, bd;
+  margin: 10px 0px;
+
+  @media screen and (max-width: $tbl) {
+    font-size: 100%;
+    font-family: Montserrat, rg;
+  }
+}
+
+h4.print-page{
+  font-weight: 300;
+  font-family: Montserrat, lt;
+  font-size: 100%;
+
+  @media screen and (max-width: $tbl) {
+    font-size: 85%;
+    font-family: Montserrat, lt;
+  }
+}
+
+h3.checkout-panel{
+  margin: 0px;
+  font-family: Montserrat, lt, arial;
+}

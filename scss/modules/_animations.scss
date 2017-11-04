@@ -1,0 +1,145 @@
+@keyframes on{
+	0%{
+		background-color: darken(#ddd, 5%);
+	}
+
+	100%{
+		background-color: lighten($color, 20%);
+	}
+}
+
+@keyframes inner-on{
+	0%{
+		right: 15px;
+		box-shadow: 2px 0px 2px rgba(#000, .3);
+		background-color: lighten(#ddd, 5%);
+	}
+
+	100%{
+		right: -3px;
+		// box-shadow: -2px 0px 2px rgba(#000, .3);
+		background-color: darken($color, 0%);
+	}
+}
+
+@keyframes inner-on-sm{
+	0%{
+		right: 20px;
+		box-shadow: 2px 0px 2px rgba(#000, .3);
+		background-color: lighten(#ddd, 5%);
+	}
+
+	100%{
+		right: 0px;
+		box-shadow: -2px 0px 2px rgba(#000, .3);
+		background-color: darken($color, 0%);
+	}
+}
+
+@keyframes off{
+	0%{
+		background-color: lighten($color, 20%);
+	}
+
+	100%{
+		background-color: darken(#ddd, 5%);
+	}
+}
+
+@keyframes inner-off{
+	0%{
+		right: -3px;
+		box-shadow: -2px 0px 3px -2px rgba(#000, .3);
+		background-color: darken($color, 0%);
+	}
+
+	100%{
+		right: 15px;
+		box-shadow: 2px 0px 2px rgba(#000, .3);
+		background-color: lighten(#ddd, 5%);
+	}
+}
+
+@keyframes inner-off-sm{
+	0%{
+		right: 0px;
+		box-shadow: -2px 0px 3px -2px rgba(#000, .3);
+		background-color: darken($color, 0%);
+	}
+
+	100%{
+		right: 20px;
+		box-shadow: 2px 0px 2px rgba(#000, .3);
+		background-color: lighten(#ddd, 5%);
+	}
+}
+
+@keyframes bounce{
+	0%{ top: 0px }
+	50%{ top: 10px }
+	75%{ top: -5px }
+	100%{ top: 0px }
+}
+
+@keyframes open{
+	0% {opacity: 0}
+	100% {opacity: 1}
+}
+
+@keyframes tile{
+	0% {margin-left: 30px}
+	100% {margin-left: 10px}
+}
+
+@keyframes tile-sm{
+	0% {margin-top: 10px}
+	100% {margin-top: -10px}
+}
+
+@keyframes remove-tile-sm{
+	100% {opacity: 0}
+	0% {opacity: 1}
+}
+
+@keyframes loader{
+	0% {top: 55%}
+	50% {top: 60%}
+	100% {top: 55%}
+}
+
+@keyframes poof{
+	0%{
+		opacity: 1;
+		display: inline-block;
+	}
+	100%{
+		opacity: 0;
+		display: none $force;
+	}
+}
+
+@keyframes remove-node{
+	100%{
+		height: 0px;
+		overflow: hidden $force;
+	}
+	50%{
+		height: 75px;
+		overflow: hidden $force;
+	}
+	40%{
+		background-color: $brand-danger;
+		color: #fff $force;
+		overflow: hidden $force;
+	}
+	20%{
+		background-color: initial;
+		color: initial $force;
+		overflow: hidden $force;
+	}
+	0%{
+		background-color: $brand-danger;
+		color: #fff $force;
+		overflow: hidden $force;
+	}
+}

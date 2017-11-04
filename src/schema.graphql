@@ -1,0 +1,353 @@
+# This is the Client Information Object
+input ClientInput {
+  # Name of Customer
+  _name: String!
+
+  # Email of Customer
+  email: String!
+
+  # Phone number of Customer
+  phone: String!
+
+  # Address of customer
+  address: String
+
+  # City of delivery
+  city: String!
+
+  # Picture Sample of Work Order
+  picture: String
+
+  # Description of Work Order
+  work_order: String
+}
+
+# This is the Client Information Object
+type ClientOutput {
+  # Name of Customer
+  _name: String
+
+  # Email of Customer
+  email: String
+
+  # Phone number of Customer
+  phone: String
+
+  # Address of customer
+  address: String
+
+  # City of delivery
+  city: String
+
+  # Picture Sample of Work Order
+  picture: String
+
+  # Description of Work Order
+  work_order: String
+}
+
+# A connection to a list of items.
+type ClientOutputConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination
+  edges: [ClientOutputEdge]
+}
+
+# An edge in a connection
+type ClientOutputEdge {
+  # The item at the end of the edge
+  node: ClientOutput
+
+  # A cursor for use in pagination
+  cursor: String!
+}
+
+input CreateItemsInput {
+  # Input fields for new Items
+  items: [ItemInput]
+  clientMutationId: String
+}
+
+type CreateItemsPayload {
+  # Input fields for new Items
+  items: [ItemOutput]
+  clientMutationId: String
+}
+
+# This is a graphql table for Welfurnish customers
+input InvoiceInput {
+  # Invoice Number
+  invoice_number: Int!
+
+  # Cost of Items Purchased
+  cost: Int!
+
+  # Purchased Items
+  items: String!
+}
+
+# This is a graphql table for Welfurnish customers
+type InvoiceOutput {
+  # Invoice Number
+  invoice_number: Int
+
+  # Cost of Items Purchased
+  cost: Int
+
+  # Purchased Items
+  items: String
+
+  # User ID
+  userKeyID: String
+
+  # Reference to Users
+  user: UsersOutput
+}
+
+type InvoiceOutputReference {
+  # Invoice Number
+  invoice_number: Int
+
+  # Cost of Items Purchased
+  cost: Int
+
+  # Purchased Items
+  items: String
+
+  # User ID
+  userKeyID: String
+}
+
+# This is an input type for Items
+input ItemInput {
+  # RealID Field
+  realID: String
+
+  # KeyID Field
+  keyID: Int
+
+  # Name of Item
+  title: String
+
+  # Category of Item
+  category: String
+
+  # Price of Item
+  price: Int
+
+  # Information on Item
+  description: String
+
+  # Path to image
+  src: String
+
+  # State of Purchase
+  purchased: Boolean
+}
+
+# This is a graphql table for Welfurnish works
+type ItemOutput {
+  # RealID Field
+  realID: String
+
+  # KeyID Field
+  keyID: Int
+
+  # Name of Item
+  title: String
+
+  # Category of Item
+  category: String
+
+  # Price of Item
+  price: Int
+
+  # Information on Item
+  description: String
+
+  # Path to image
+  src: String
+
+  # State of Purchase
+  purchased: Boolean
+}
+
+input MakeCustomOrderInput {
+  # Name of Customer
+  _name: String!
+
+  # Email of Customer
+  email: String!
+
+  # Phone number of Customer
+  phone: String!
+
+  # Address of customer
+  address: String
+
+  # City of delivery
+  city: String!
+
+  # Picture Sample of Work Order
+  picture: String
+
+  # Description of Work Order
+  work_order: String
+  clientMutationId: String
+}
+
+type MakeCustomOrderPayload {
+  # Result from order
+  customer: ClientOutput
+  clientMutationId: String
+}
+
+input MakeRegularOrderInput {
+  # Input fields for customer order
+  customer: ClientInput
+
+  # Input fields for Invoice
+  invoice: InvoiceInput
+  clientMutationId: String
+}
+
+type MakeRegularOrderPayload {
+  # Result from order
+  customer: ClientOutput
+
+  # New Invoice
+  invoice: InvoiceOutput
+  clientMutationId: String
+}
+
+# Root Mutation
+type Mutation {
+  customOrder(input: MakeCustomOrderInput!): MakeCustomOrderPayload
+  regularOrder(input: MakeRegularOrderInput!): MakeRegularOrderPayload
+  createItems(input: CreateItemsInput!): CreateItemsPayload
+  updateItems(input: UpdateItemsInput!): UpdateItemsPayload
+}
+
+# An object with an ID
+interface Node {
+  # The id of the object
+  id: ID!
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# This is the root query
+type Query {
+  items: [ItemOutput]
+  users(after: String, first: Int, before: String, last: Int): UsersOutputConnection
+  clients(after: String, first: Int, before: String, last: Int): ClientOutputConnection
+  invoices: [InvoiceOutput]
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+# This is a graphql table for Welfurnish works
+input UpdateItemInput {
+  # RealID Field
+  realID: String
+
+  # KeyID Field
+  keyID: Int
+
+  # Name of Item
+  title: String
+
+  # Category of Item
+  category: String
+
+  # Price of Item
+  price: Int
+
+  # Information on Item
+  description: String
+
+  # Path to image
+  src: String
+
+  # State of Purchase
+  purchased: Boolean
+}
+
+input UpdateItemsInput {
+  # Item update field
+  items: UpdateItemInput
+  clientMutationId: String
+}
+
+type UpdateItemsPayload {
+  # Input fields for new Items
+  items: ItemOutput
+  clientMutationId: String
+}
+
+# This is a graphql table for Welfurnish customers
+type UsersOutput implements Node {
+  # KeyID Field
+  keyID: String
+
+  # Name of Customer
+  _name: String
+
+  # Email of Customer
+  email: String
+
+  # Phone number of Customer
+  phone: String
+
+  # Address of customer
+  address: String
+
+  # City of delivery
+  city: String
+
+  # Picture Sample of Work Order
+  picture: String
+
+  # Description of Work Order
+  work_order: String
+
+  # Reference to Invoices
+  invoices: InvoiceOutputReference
+}
+
+# A connection to a list of items.
+type UsersOutputConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # Information to aid in pagination
+  edges: [UsersOutputEdge]
+}
+
+# An edge in a connection
+type UsersOutputEdge {
+  # The item at the end of the edge
+  node: UsersOutput
+
+  # A cursor for use in pagination
+  cursor: String!
+}

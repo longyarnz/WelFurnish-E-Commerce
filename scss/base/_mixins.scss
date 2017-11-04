@@ -1,0 +1,41 @@
+/* Custom Mixins */
+
+@mixin add-border($size, $color, $position){
+	@if $position == 'all' {
+		border: $size solid $color !important;
+	} 
+	@else if $position == 'top' {
+		border-top: $size solid $color !important;
+	} 
+	@else if $position == 'bottom' {
+		border-bottom: $size solid $color !important;
+	} 
+	@else if $position == 'right' {
+		border-right: $size solid $color !important;
+	} 
+	@else if $position == 'left' {
+		border-left: $size solid $color !important;
+	} 
+	@else if $position == 'top-bottom' {
+		border-top: $size solid $color !important;
+		border-bottom: $size solid $color !important;
+	} 
+	@else if $position == 'left-right' {
+		border-right: $size solid $color !important;
+		border-left: $size solid $color !important;
+	}
+}
+
+@mixin transform-element($degree) {
+	 -ms-transform: rotate($degree + deg); /* IE 9 */
+    -webkit-transform: rotate($degree + deg); /* Safari */
+    transform: rotate($degree + deg);
+}
+
+@mixin gradient-horizontal-three-colors($start-color: #00b3ee, $mid-color: #7a43b6, $color-stop: 50%, $end-color: #c3325f) {
+  background-image: -webkit-linear-gradient(left, $start-color, $mid-color $color-stop, $end-color);
+  background-image: -o-linear-gradient(left, $start-color, $mid-color $color-stop, $end-color);
+  background-image: linear-gradient(to right, $start-color, $mid-color $color-stop, $end-color);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=1); // IE9 and down, gets no color-stop at all for proper fallback
+}
