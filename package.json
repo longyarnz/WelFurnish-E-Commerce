@@ -20,7 +20,9 @@
     "express-graphql": "^0.6.7",
     "form-data": "^2.3.1",
     "fs": "^0.0.1-security",
+    "mongoose": "^4.13.1",
     "multer": "^1.3.0",
+    "nodemon": "^1.12.1",
     "paystack": "^1.4.1",
     "react": "16",
     "react-dom": "16",
@@ -86,7 +88,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "relay": "relay-compiler --src ./src --schema ./schema.graphql",
     "get": "babel-node ./scripts/getSchema",
-    "serve": "babel-node ./data/server",
+    "serve": "nodemon --exec babel-node -- ./data/server",
     "data": "babel-node ./data/database"
   },
   "jest": {

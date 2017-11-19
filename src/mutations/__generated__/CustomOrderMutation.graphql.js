@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule CustomOrderMutation.graphql
- * @generated SignedSource<<129e9010bc90a2bf509a6103d69c66db>>
- * @relayHash 8716b301f57320f0414b2986b272833a
+ * @generated SignedSource<<21fc97832a02a7b1a6a44c9e5e43f891>>
+ * @relayHash e85b4b8746a11c0143711261c24ee77a
  * @flow
  * @nogrep
  */
@@ -19,14 +19,13 @@ export type MakeCustomOrderInput = {
   _name?: ?string;
   email?: ?string;
   phone?: ?string;
-  address?: ?string;
   city?: ?string;
   picture_file?: ?string;
   work_order?: ?string;
 };
 
 export type CustomOrderMutationResponse = {
-  customer?: ?Array<?CustomOrderMutationResponse_customer>;
+  customer?: ?CustomOrderMutationResponse_customer;
 };
 
 export type CustomOrderMutationResponse_customer = {
@@ -94,7 +93,7 @@ const batch /*: ConcreteBatch*/ = {
             "args": null,
             "concreteType": "ClientOutput",
             "name": "customer",
-            "plural": true,
+            "plural": false,
             "selections": [
               {
                 "kind": "ScalarField",
@@ -192,7 +191,7 @@ const batch /*: ConcreteBatch*/ = {
             "args": null,
             "concreteType": "ClientOutput",
             "name": "customer",
-            "plural": true,
+            "plural": false,
             "selections": [
               {
                 "kind": "ScalarField",

@@ -53,15 +53,18 @@ export default class PrintPage extends Component {
     const variables = {regOrder: info};
     cost = Math.floor(1.01 * cost);    
     info = JSON.parse(JSON.stringify(info));
-    Mutate(variables, (payload) => 
+    Mutate(variables, payload => 
       {
         info.invoice.invoice_number = (<em>Loading</em>);
         this.props.actions.setInfo(info);
         this.props.actions.viewPrint();
       }, (payload) => {
         // console.log(payload);
-        this.setState({ reference: payload.regularOrder.invoice[0].userKeyID })
-        Object.assign(info.invoice, payload.regularOrder.invoice[0]);
+        // this.setState({ reference: payload.regularOrder.invoice[0].userKeyID });
+        // Object.assign(info.invoice, payload.regularOrder.invoice[0]);
+        console.log(payload);               
+        this.setState({ reference: payload.regularOrder.invoice.user });
+        Object.assign(info.invoice, payload.regularOrder.invoice);
         this.props.actions.setInfo(info);
         const paystack = window.PaystackPop.setup({
           key: this.state.paystack,
@@ -138,7 +141,7 @@ export default class PrintPage extends Component {
         		<button className="print-page" onClick={this._onClick}>GO BACK</button>
             <button className="print-page" onClick={this._makePayment}>MAKE PAYMENT</button>
             <button className="print-page" onClick={()=>actions.remove('all')}>CANCEL ORDER</button>
-            </div>
+          </div>
         	<footer className="print-page">INVOICE GENERATED AT {this._getTime()}</footer>
         </section>
       </section>

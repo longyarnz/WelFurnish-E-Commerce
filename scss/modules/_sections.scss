@@ -131,7 +131,7 @@ section{
 
 		p.form-message{
 			font-size: 90%;
-			font-family: Montserrat, lt, arial;
+			font-family: Montserrat, $font;
 			font-weight: 300;
 			padding: 20px;
 			background-color: #fff;
@@ -255,7 +255,7 @@ section{
       font-size: 80%;
       color: $base;
       font-weight: 300;
-      font-family: Montserrat, lt;
+      font-family: Montserrat, $font;
       vertical-align: middle;
 
       @media screen and (min-width: $pad-min) {
@@ -265,7 +265,7 @@ section{
 
 		div p{
 			width: 90%;
-			font-family: Montserrat, lt, arial, sans-serif;
+			font-family: Montserrat, $font;
 			font-weight: 300;
 			color: lighten(#000, 20%);
 			font-size: 90%;
@@ -336,7 +336,7 @@ section{
 		background-color: $base;
 		padding: 3% 18%;
 		z-index: 4;
-		font-family: Montserrat, lt, arial, sans-serif;
+		font-family: Montserrat, $font;
 		font-weight: 300;
 		font-size: 80%;
 
@@ -440,7 +440,7 @@ section{
 				text-align: center;
 				font-size: 200%;
 				font-weight: 700;
-				font-family: Montserrat, bd;
+				font-family: Montserrat, $font;
 				background-color: #d9534f;
 				color: #fff;
 				overflow: hidden;
@@ -498,7 +498,7 @@ section{
 								border-left: none;
 								padding-left: 20px;
 								font-weight: 700;
-								font-family: Montserrat, bd, arial;
+								font-family: Montserrat, $font;
 							}
 						}
 
@@ -539,7 +539,7 @@ section{
 							&:first-of-type{
 								@media screen and (max-width: $tbl) {
 									font-weight: 300;
-									font-family: Montserrat, lt;
+									font-family: Montserrat, $font;
 								}
 							}
 						}

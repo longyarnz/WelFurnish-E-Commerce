@@ -1,32 +1,4 @@
-# This is the Client Information Object
-input ClientInput {
-  # Name of Customer
-  _name: String!
-
-  # Email of Customer
-  email: String!
-
-  # Phone number of Customer
-  phone: String!
-
-  # Address of customer
-  address: String
-
-  # City of delivery
-  city: String!
-
-  # Picture Sample of Work Order
-  picture_file: String
-
-  # Description of Work Order
-  work_order: String
-}
-
-# This is the Client Information Object
-type ClientOutput {
-  # KeyID Field
-  keyID: String
-
+input ClientOptions {
   # Name of Customer
   _name: String
 
@@ -49,22 +21,28 @@ type ClientOutput {
   work_order: String
 }
 
-# A connection to a list of items.
-type ClientOutputConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
+# This is the Client Information Object
+type ClientOutput {
+  # Name of Customer
+  _name: String
 
-  # Information to aid in pagination
-  edges: [ClientOutputEdge]
-}
+  # Email of Customer
+  email: String
 
-# An edge in a connection
-type ClientOutputEdge {
-  # The item at the end of the edge
-  node: ClientOutput
+  # Phone number of Customer
+  phone: String
 
-  # A cursor for use in pagination
-  cursor: String!
+  # Address of customer
+  address: String
+
+  # City of delivery
+  city: String
+
+  # Picture Sample of Work Order
+  picture_file: String
+
+  # Description of Work Order
+  work_order: String
 }
 
 input CreateItemsInput {
@@ -82,13 +60,27 @@ type CreateItemsPayload {
 # This is a graphql table for Welfurnish customers
 input InvoiceInput {
   # Invoice Number
-  invoice_number: Int
+  invoice_number: Int!
 
   # Cost of Items Purchased
   cost: Int!
 
   # Purchased Items
   items: String!
+}
+
+input InvoiceOptions {
+  # Invoice Number
+  invoice_number: Int
+
+  # Cost of Items Purchased
+  cost: Int
+
+  # Purchased Items
+  items: String
+
+  # User ID
+  user: String
 }
 
 # This is a graphql table for Welfurnish customers
@@ -101,30 +93,40 @@ type InvoiceOutput {
 
   # Purchased Items
   items: String
-
-  # User ID
-  userKeyID: String
-
-  # Reference to Users
-  user: UserOutput
-}
-
-type InvoiceOutputReference {
-  # Invoice Number
-  invoice_number: Int
-
-  # Cost of Items Purchased
-  cost: Int
-
-  # Purchased Items
-  items: String
-
-  # User ID
-  userKeyID: String
+  user: User
 }
 
 # This is an input type for Items
 input ItemInput {
+  # RealID Field
+  realID: String
+
+  # KeyID Field
+  keyID: Int
+
+  # Name of Item
+  title: String!
+
+  # Category of Item
+  category: String!
+
+  # Price of Item
+  price: Int!
+
+  # Information on Item
+  description: String!
+
+  # Path to image
+  src_file: String!
+
+  # Path to image
+  sub: String!
+
+  # State of Purchase
+  purchased: Boolean!
+}
+
+input ItemOptions {
   # RealID Field
   realID: String
 
@@ -137,9 +139,6 @@ input ItemInput {
   # Category of Item
   category: String
 
-  # Subcategory of Item
-  sub: String
-
   # Price of Item
   price: Int
 
@@ -148,6 +147,9 @@ input ItemInput {
 
   # Path to image
   src_file: String
+
+  # Path to image
+  sub: String
 
   # State of Purchase
   purchased: Boolean
@@ -167,9 +169,6 @@ type ItemOutput {
   # Category of Item
   category: String
 
-  # Subcategory of Item
-  sub: String
-
   # Price of Item
   price: Int
 
@@ -178,6 +177,9 @@ type ItemOutput {
 
   # Path to image
   src_file: String
+
+  # Path to image
+  sub: String
 
   # State of Purchase
   purchased: Boolean
@@ -193,9 +195,6 @@ input MakeCustomOrderInput {
   # Phone number of Customer
   phone: String!
 
-  # Address of customer
-  address: String
-
   # City of delivery
   city: String!
 
@@ -203,19 +202,19 @@ input MakeCustomOrderInput {
   picture_file: String
 
   # Description of Work Order
-  work_order: String
+  work_order: String!
   clientMutationId: String
 }
 
 type MakeCustomOrderPayload {
   # Result from order
-  customer: [ClientOutput]
+  customer: ClientOutput
   clientMutationId: String
 }
 
 input MakeRegularOrderInput {
   # Input fields for customer order
-  customer: ClientInput
+  customer: UserInput
 
   # Input fields for Invoice
   invoice: InvoiceInput
@@ -224,42 +223,34 @@ input MakeRegularOrderInput {
 
 type MakeRegularOrderPayload {
   # Result from order
-  customer: [ClientOutput]
+  customer: ClientOutput
 
   # New Invoice
-  invoice: [InvoiceOutput]
+  invoice: InvoiceOutput
   clientMutationId: String
 }
 
 # Root Mutation
 type Mutation {
+  # Customer can make custom orders
   customOrder(input: MakeCustomOrderInput!): MakeCustomOrderPayload
+
+  # Customer can make regular orders
   regularOrder(input: MakeRegularOrderInput!): MakeRegularOrderPayload
+
+  # New Items can be added
   createItems(input: CreateItemsInput!): CreateItemsPayload
+
+  # Item properties can be updated
   updateItems(input: UpdateItemsInput!): UpdateItemsPayload
-}
-
-# Information about pagination in a connection.
-type PageInfo {
-  # When paginating forwards, are there more items?
-  hasNextPage: Boolean!
-
-  # When paginating backwards, are there more items?
-  hasPreviousPage: Boolean!
-
-  # When paginating backwards, the cursor to continue.
-  startCursor: String
-
-  # When paginating forwards, the cursor to continue.
-  endCursor: String
 }
 
 # This is the root query
 type Query {
-  items: [ItemOutput]
-  users(after: String, first: Int, before: String, last: Int): UserOutputConnection
-  clients(after: String, first: Int, before: String, last: Int): ClientOutputConnection
-  invoices: [InvoiceOutput]
+  items(options: ItemOptions, limits: Int, sort: String): [ItemOutput]
+  users(options: UserOptions, limits: Int, sort: String): [User]
+  clients(options: ClientOptions, limits: Int, sort: String): [ClientOutput]
+  invoices(options: InvoiceOptions, limits: Int, sort: String): [InvoiceOutput]
 }
 
 # This is a graphql table for Welfurnish works
@@ -268,16 +259,13 @@ input UpdateItemInput {
   realID: String
 
   # KeyID Field
-  keyID: Int
+  keyID: Int!
 
   # Name of Item
   title: String
 
   # Category of Item
   category: String
-
-  # Subcategory of Item
-  sub: String
 
   # Price of Item
   price: Int
@@ -287,6 +275,9 @@ input UpdateItemInput {
 
   # Path to image
   src_file: String
+
+  # Path to image
+  sub: String
 
   # State of Purchase
   purchased: Boolean
@@ -305,7 +296,7 @@ type UpdateItemsPayload {
 }
 
 # This is a graphql table for Welfurnish customers
-type UserOutput {
+type User {
   # KeyID Field
   keyID: String
 
@@ -329,25 +320,46 @@ type UserOutput {
 
   # Description of Work Order
   work_order: String
-
-  # Reference to Invoices
-  invoices: InvoiceOutputReference
+  invoices: [InvoiceOutput]
 }
 
-# A connection to a list of items.
-type UserOutputConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
+# This is the Client Information Object
+input UserInput {
+  # Name of Customer
+  _name: String!
 
-  # Information to aid in pagination
-  edges: [UserOutputEdge]
+  # Email of Customer
+  email: String!
+
+  # Phone number of Customer
+  phone: String!
+
+  # Address of customer
+  address: String!
+
+  # City of delivery
+  city: String!
 }
 
-# An edge in a connection
-type UserOutputEdge {
-  # The item at the end of the edge
-  node: UserOutput
+input UserOptions {
+  # Name of Customer
+  _name: String
 
-  # A cursor for use in pagination
-  cursor: String!
+  # Email of Customer
+  email: String
+
+  # Phone number of Customer
+  phone: String
+
+  # Address of customer
+  address: String
+
+  # City of delivery
+  city: String
+
+  # Picture Sample of Work Order
+  picture_file: String
+
+  # Description of Work Order
+  work_order: String
 }

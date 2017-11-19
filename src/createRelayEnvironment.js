@@ -1,6 +1,5 @@
 import UploadFileMethod from './UploadFileMethod';
-import { SubscriptionClient } from 'subscriptions-transport-ws';
-import Ajax from './components/Ajax';
+// import Ajax from './components/Ajax';
 import {
   Environment,
   Network,
@@ -14,10 +13,9 @@ function fetchQuery(
   cacheConfig,
   uploadables
 ) {
-  // console.log(operation, variables);
   if(uploadables) UploadFileMethod(uploadables)
   // return Ajax(`http://192.168.43.16:8080/`, 'POST', JSON.stringify({ query: operation.text, variables }), response => JSON.parse(response) );
-  return fetch(`http://192.168.43.16:8080/`, {
+  return fetch(`http://127.0.0.1:4000/graphql`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -31,15 +29,7 @@ function fetchQuery(
   });
 }
 
-function setupSubscription(config, variables, cacheConfig, observer){
-  const query = config.text;
-  const client = new SubscriptionClient('ws://127.1.1.1/ws', {reconnect: true});
-  client.subscribe({query, variables}, (error, result) => {
-    observer.onNext({ data: result })
-  });
-}
-
-const network = Network.create(fetchQuery, setupSubscription);
+const network = Network.create(fetchQuery);
 const source = new RecordSource();
 const store = new Store(source);
 export default new Environment({ network, store });

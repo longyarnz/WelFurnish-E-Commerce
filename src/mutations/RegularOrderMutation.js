@@ -6,7 +6,10 @@ const mutation = graphql`
     regularOrder(input: $regOrder){
       invoice{
         invoice_number
-        userKeyID
+        # userKeyID
+        user{
+          keyID
+        }
       }
     }
   }
@@ -28,7 +31,8 @@ export default function commit(
   _callback,
   _store
 ) {
-  delete variables.regOrder.invoice.userKeyID;
+  // delete variables.regOrder.invoice.userKeyID;
+  delete variables.regOrder.invoice.user;
   return commitMutation(
     Environment,
     {

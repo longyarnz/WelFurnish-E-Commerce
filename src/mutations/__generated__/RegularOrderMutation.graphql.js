@@ -3,8 +3,8 @@
  *   relay-compiler
  *
  * @providesModule RegularOrderMutation.graphql
- * @generated SignedSource<<e861c49d38e13d636f72e05c249fb257>>
- * @relayHash b8edcd7e87c367fd0dd9f599641c65ac
+ * @generated SignedSource<<5cb83a952a66d3bc51fe0fc6444e4a69>>
+ * @relayHash de6333f96a8dbcd578858eca8926a31b
  * @flow
  * @nogrep
  */
@@ -26,23 +26,26 @@ export type MakeRegularOrderInput_customer = {
   phone?: ?string;
   address?: ?string;
   city?: ?string;
-  picture_file?: ?string;
-  work_order?: ?string;
 };
 
 export type MakeRegularOrderInput_invoice = {
   invoice_number?: ?number;
   cost?: ?number;
   items?: ?string;
+  user?: ?string;
 };
 
 export type RegularOrderMutationResponse = {
-  invoice?: ?Array<?RegularOrderMutationResponse_invoice>;
+  invoice?: ?RegularOrderMutationResponse_invoice;
+};
+
+export type RegularOrderMutationResponse_invoice_user = {
+  keyID?: ?string;
 };
 
 export type RegularOrderMutationResponse_invoice = {
   invoice_number?: ?number;
-  userKeyID?: ?string;
+  user?: ?RegularOrderMutationResponse_invoice_user;
 };
 */
 
@@ -54,7 +57,9 @@ mutation RegularOrderMutation(
   regularOrder(input: $regOrder) {
     invoice {
       invoice_number
-      userKeyID
+      user {
+        keyID
+      }
     }
   }
 }
@@ -95,7 +100,7 @@ const batch /*: ConcreteBatch*/ = {
             "args": null,
             "concreteType": "InvoiceOutput",
             "name": "invoice",
-            "plural": true,
+            "plural": false,
             "selections": [
               {
                 "kind": "ScalarField",
@@ -105,10 +110,21 @@ const batch /*: ConcreteBatch*/ = {
                 "storageKey": null
               },
               {
-                "kind": "ScalarField",
+                "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "name": "userKeyID",
+                "concreteType": "User",
+                "name": "user",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "keyID",
+                    "storageKey": null
+                  }
+                ],
                 "storageKey": null
               }
             ],
@@ -158,7 +174,7 @@ const batch /*: ConcreteBatch*/ = {
             "args": null,
             "concreteType": "InvoiceOutput",
             "name": "invoice",
-            "plural": true,
+            "plural": false,
             "selections": [
               {
                 "kind": "ScalarField",
@@ -168,10 +184,21 @@ const batch /*: ConcreteBatch*/ = {
                 "storageKey": null
               },
               {
-                "kind": "ScalarField",
+                "kind": "LinkedField",
                 "alias": null,
                 "args": null,
-                "name": "userKeyID",
+                "concreteType": "User",
+                "name": "user",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "ScalarField",
+                    "alias": null,
+                    "args": null,
+                    "name": "keyID",
+                    "storageKey": null
+                  }
+                ],
                 "storageKey": null
               }
             ],
@@ -182,7 +209,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "mutation RegularOrderMutation(\n  $regOrder: MakeRegularOrderInput!\n) {\n  regularOrder(input: $regOrder) {\n    invoice {\n      invoice_number\n      userKeyID\n    }\n  }\n}\n"
+  "text": "mutation RegularOrderMutation(\n  $regOrder: MakeRegularOrderInput!\n) {\n  regularOrder(input: $regOrder) {\n    invoice {\n      invoice_number\n      user {\n        keyID\n      }\n    }\n  }\n}\n"
 };
 
 module.exports = batch;
