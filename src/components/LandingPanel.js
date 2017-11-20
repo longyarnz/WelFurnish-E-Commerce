@@ -27,8 +27,8 @@ export default class LandingPanel extends Component {
   }
 
   _click(){
-    this.setState({ view: "no-display "});
-    this.props.actions.viewShop();
+    // this.setState({ view: "no-display "});
+    this.props.actions.viewShop(true);
   }
 
   render() {
@@ -36,7 +36,7 @@ export default class LandingPanel extends Component {
     const inline = { height }
     const iconArray = ["fa-facebook", "fa-twitter", "fa-instagram"];
     return (
-      <section ref="land" className={this.props.actions.appView.land+" landing-panel"} style={inline} >
+      <section ref="land" className="landing-panel" style={inline} >
         <div className="dk-bg">
           <header className="landing-panel">
             <img src={Logo} alt="WelFurnish" />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Logo from '../../src/files/logo.png';
-import Mutate from '../mutations/RegularOrderMutation';
+import FetchGraph from './FetchGraph';
 
 export default class PrintPage extends Component {
 	constructor(props){
@@ -36,7 +36,7 @@ export default class PrintPage extends Component {
 
 	_getOrder(){
 		const { cart, reNumber } = this.props.actions;
-		const order = cart.map(item=>` ${item.title} (₦ ${reNumber(item.price)}  × ${item.qty}pcs)`);
+		const order = cart.map(item =>` ${item.title} (₦ ${reNumber(item.price)}  × ${item.qty}pcs)`);
 		return order.toString().trim();
 	}
 
@@ -53,32 +53,34 @@ export default class PrintPage extends Component {
     const variables = {regOrder: info};
     cost = Math.floor(1.01 * cost);    
     info = JSON.parse(JSON.stringify(info));
-    Mutate(variables, payload => 
-      {
-        info.invoice.invoice_number = (<em>Loading</em>);
-        this.props.actions.setInfo(info);
-        this.props.actions.viewPrint();
-      }, (payload) => {
-        // console.log(payload);
-        // this.setState({ reference: payload.regularOrder.invoice[0].userKeyID });
-        // Object.assign(info.invoice, payload.regularOrder.invoice[0]);
-        console.log(payload);               
-        this.setState({ reference: payload.regularOrder.invoice.user });
-        Object.assign(info.invoice, payload.regularOrder.invoice);
-        this.props.actions.setInfo(info);
-        const paystack = window.PaystackPop.setup({
-          key: this.state.paystack,
-          email: info.customer.email,
-          amount: cost * 100,
-          ref: this.state.reference,
-          metadata: this._getMetaData(),
-          callback: (res)=>console.log("Payment Completed"),
-          onClose: ()=>console.log("Payment Closed"),
-          currency: "NGN"
-        });
-        paystack.openIframe();
+    const query = `
+      mutation RegularOrderMutation($regOrder: MakeRegularOrderInput!){
+        regularOrder(input: $regOrder){
+          invoice{
+            invoice_number
+            user{
+              keyID
+            }
+          }
+        }
       }
-    );
+    `;
+    FetchGraph(query, variables, payload => {
+      this.setState({ reference: payload.regularOrder.invoice.user });
+      Object.assign(info.invoice, payload.regularOrder.invoice);
+      this.props.actions.setInfo(info);
+      const paystack = window.PaystackPop.setup({
+        key: this.state.paystack,
+        email: info.customer.email,
+        amount: cost * 100,
+        ref: this.state.reference,
+        metadata: this._getMetaData(),
+        callback: (res)=>console.log("Payment Completed"),
+        onClose: ()=>console.log("Payment Closed"),
+        currency: "NGN"
+      });
+      paystack.openIframe();
+    });
   }
 
 	_onClick(){

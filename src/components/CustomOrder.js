@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DynamicForm from './DynamicForm';
-import Mutate from '../mutations/CustomOrderMutation';
+import FetchGraph from './FetchGraph';
 
 export default class CustomOrder extends Component {
 	constructor(props){
@@ -63,7 +63,22 @@ export default class CustomOrder extends Component {
 		}
 		check = check.indexOf("") >= 0 ? false : true;
 		if(check) {
-			Mutate({ customOrder }, uploadables, ()=>this.props.setForm(formValues['_name'], true));
+			const query = `
+			  mutation CustomOrderMutation($customOrder: MakeCustomOrderInput!){
+			    customOrder(input: $customOrder){
+			      customer {
+			        _name
+			        email
+			        phone
+			        address
+			        city
+			        picture_file
+			        work_order
+			      }
+			    }
+			  }
+			`;
+			FetchGraph(query, { customOrder }, () => this.props.setForm(formValues['_name'], true));
 			custom.reset();
 		}
 	}
