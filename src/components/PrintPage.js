@@ -58,16 +58,14 @@ export default class PrintPage extends Component {
         regularOrder(input: $regOrder){
           invoice{
             invoice_number
-            user{
-              keyID
-            }
           }
+          keyID
         }
       }
     `;
-    FetchGraph(query, variables, payload => {
-      this.setState({ reference: payload.regularOrder.invoice.user });
-      Object.assign(info.invoice, payload.regularOrder.invoice);
+    FetchGraph(query, variables, ({ data }) => {
+      this.setState({ reference: data.regularOrder.keyID });
+      Object.assign(info.invoice, data.regularOrder.invoice);
       this.props.actions.setInfo(info);
       const paystack = window.PaystackPop.setup({
         key: this.state.paystack,
@@ -75,8 +73,8 @@ export default class PrintPage extends Component {
         amount: cost * 100,
         ref: this.state.reference,
         metadata: this._getMetaData(),
-        callback: (res)=>console.log("Payment Completed"),
-        onClose: ()=>console.log("Payment Closed"),
+        callback: res => console.log("Payment Completed"),
+        onClose: () => console.log("Payment Closed"),
         currency: "NGN"
       });
       paystack.openIframe();

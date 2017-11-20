@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import environment from './createRelayEnvironment';
 import AppLogic from './AppLogic';
 import FetchGraph from './components/FetchGraph';
 import LandingPanel from './components/LandingPanel';
@@ -33,8 +32,8 @@ export default class App extends Component {
 			  }
 			}
     `;
-    const items = FetchGraph(query, {}, res => {
-    	this.setState({ items: res.data.items });
+    FetchGraph(query, {}, ({ data }) => {
+    	this.setState({ items: data.items });
     })
   }
 

@@ -6,10 +6,7 @@ export default class LandingPanel extends Component {
   constructor(props) {
     super(props);
     this._click = this._click.bind(this);
-    this.state = {
-      height: window.screen.availHeight - 80,
-      view: ""
-    }
+    this.state = { height: window.screen.availHeight - 80 }
   }
 
   componentDidMount() {
@@ -27,7 +24,6 @@ export default class LandingPanel extends Component {
   }
 
   _click(){
-    // this.setState({ view: "no-display "});
     this.props.actions.viewShop(true);
   }
 

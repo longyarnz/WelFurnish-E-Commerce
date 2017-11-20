@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LandingPanel from './components/LandingPanel';
 import Navigator from './components/Navigator';
 import MobilePanel from './components/MobilePanel';
 import ShopArea from './components/ShopArea';
@@ -39,9 +40,9 @@ export default class AppLogic extends Component {
     const totalPage = Math.ceil(this.props.items.length / 6);
     this.state = { 
       counter: 0, totalPage, cartItems: [], height: 0, keyID: 1, prevOrder: [], display: [], knob: "", loadMore: false, noItem: false,
-      dataList: [], figure: "Show All", price: Infinity , customDisplay: false, newTotal: 0, catClicked: false,  hasMore: true,
+      dataList: {}, figure: "Show All", price: Infinity , customDisplay: false, newTotal: 0, catClicked: false,  hasMore: true,
       tile: "jill", restore: { bigView: "jack", custom: "jack", tile: "jill" }, bigView: "jack", custom: "jack", screenHeight: 0, cost: 0,
-      appView: {land: "reload", shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "Lekan", 
+      appView: {land: "reload", shop: nav, nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "Lekan", 
       email: "mail@mail.com", phone: 8082935102, address: "OAU, Ile-ife", city: "Osun"}, invoice: {invoice_number: 0, items: "", cost: 0, 
       userKeyID: "0000" }}, 
     }
@@ -299,7 +300,8 @@ export default class AppLogic extends Component {
   render() {
     const actions = this.actions();
     return (
-      <div className="app" ref={this._getRef}>  
+      <div className="app" ref={this._getRef}>
+        <LandingPanel actions={actions} />  
       	<Navigator actions={actions} />
         <MobilePanel actions={actions} />
       	<ShopArea actions={actions} />
