@@ -54,16 +54,16 @@ export default class PrintPage extends Component {
     cost = Math.floor(1.01 * cost);    
     info = JSON.parse(JSON.stringify(info));
     const query = `
-      mutation RegularOrderMutation($regOrder: MakeRegularOrderInput!){
-        regularOrder(input: $regOrder){
+      mutation RegularOrder($customer: UserInput!, $invoice: InvoiceInput!){
+        MakeRegularOrder(client: $customer, invoice: $invoice){
+          keyID
           invoice{
             invoice_number
           }
-          keyID
         }
       }
     `;
-    FetchGraph(query, variables, ({ data }) => {
+    FetchGraph(query, variables, null, ({ data }) => {
       this.setState({ reference: data.regularOrder.keyID });
       Object.assign(info.invoice, data.regularOrder.invoice);
       this.props.actions.setInfo(info);

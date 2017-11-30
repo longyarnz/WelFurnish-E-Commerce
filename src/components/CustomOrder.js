@@ -60,25 +60,24 @@ export default class CustomOrder extends Component {
 			}
 			customOrder[x] = formValues[x];
 			check.push(formValues[x]);
+			console.log(uploadables);
 		}
 		check = check.indexOf("") >= 0 ? false : true;
 		if(check) {
 			const query = `
-			  mutation CustomOrderMutation($customOrder: MakeCustomOrderInput!){
-			    customOrder(input: $customOrder){
-			      customer {
-			        _name
-			        email
-			        phone
-			        address
-			        city
-			        picture_file
-			        work_order
-			      }
+			  mutation CustomOrder($customOrder: UserInput!){
+			    CustomOrder(client: $customOrder){
+			      _name
+		        email
+		        phone
+		        city
+		        picture_file
+		        work_order
 			    }
 			  }
 			`;
-			FetchGraph(query, { customOrder }, () => this.props.setForm(formValues['_name'], true));
+			this.props.setForm(formValues['_name'], true);
+			FetchGraph(query, { customOrder }, uploadables, () => this.props.setForm(formValues['_name'], true));
 			custom.reset();
 		}
 	}

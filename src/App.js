@@ -32,7 +32,7 @@ export default class App extends Component {
 			  }
 			}
     `;
-    FetchGraph(query, {}, ({ data }) => {
+    FetchGraph(query, {}, null, ({ data }) => {
     	this.setState({ items: data.items });
     })
   }
