@@ -91,7 +91,7 @@ export default class PrintPage extends Component {
   	const inline = { minHeight: actions.height + 20 }
   	const cost = Math.floor(1.01 * actions.cost);
     return (
-      <section className={actions.appView.print + " print-page"} style={ inline }>
+      <section className="print-page" style={ inline }>
       	<section className="inner-pane">
       		<img src={Logo} alt="WelFurnish" />
         	<aside className="print-page left-pane no-display">

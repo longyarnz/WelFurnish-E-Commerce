@@ -68,7 +68,7 @@ export default class BigItemView extends Component {
     const small = this.state.clicked;
     const button = small ? "REMOVE FROM CART" : "ADD TO CART";
     return (
-      <section className={`big-view`} style={inline}>
+      <section className="big-view" style={inline}>
         <h1 className="big-view caption">{title}</h1>
         <span className="back" onClick={this.props.actions.clickBack}>GO BACK</span>
         <Image sources={sources} imgClass="gallery" />

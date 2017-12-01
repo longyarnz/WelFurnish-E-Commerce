@@ -4,7 +4,7 @@ export default class Navigator extends Component {
   render() {
   	const { actions } = this.props;
     const shop = "no-display", mobi = "reload";
-  	const className = `${actions.appView.nav} navigator`;
+  	const className = `navigator`;
     return (
       <header className={className}>
       	<button className="navigator" onClick={()=>actions.shop(shop, mobi, true)}>CATEGORIES</button>

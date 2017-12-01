@@ -24,7 +24,7 @@ export default class TilesSection extends Component {
 			page: currentPage
 		}
 		return (
-      <section className={`cart-section`}>
+      <section className="cart-section">
       	<Paginator currentPage={currentPage} totalPage={totalPage} onClick={changePage} press={this.props.actions.goToPage} arrow={this.props.actions.arrow} />
 	    	<TilesContainer actions={actions} />
 	    </section>

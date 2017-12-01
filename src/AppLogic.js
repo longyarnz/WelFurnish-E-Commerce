@@ -41,9 +41,8 @@ export default class AppLogic extends Component {
       counter: 0, totalPage, cartItems: [], height: 0, keyID: 1, prevOrder: [], display: [], knob: "", loadMore: false, noItem: false,
       dataList: [], figure: "Show All", price: Infinity , customDisplay: false, newTotal: 0, catClicked: false,  hasMore: true,
       tile: "jill", restore: { bigView: "jack", custom: "jack", tile: "jill" }, bigView: "jack", custom: "jack", screenHeight: 0, cost: 0,
-      appView: {land: "reload", shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", 
-      email: "", phone: "", address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, 
-      userKeyID: "0000" }}, 
+      appView: {shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", 
+      email: "", phone: "", address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}, 
     }
   }
 
@@ -69,12 +68,12 @@ export default class AppLogic extends Component {
 
   _clickTile(keyID){
     this.setState({ bigView: "jill", custom: "jack", tile: "jack", keyID,
-      appView: {shop: "", nav: "no-display", land: "no-display", form: "no-display", panel: "no-display", print: "no-display", mobi: "no-display"} 
+      appView: {shop: "", nav: "no-display", form: "no-display", panel: "no-display", print: "no-display", mobi: "no-display"} 
     });
   }
 
   _controlShop(shop, mobi, knob){
-    this.setState({ appView: { shop, mobi, nav: "reload", land: "no-display", form: "no-display", panel: "no-display", print: "no-display" }, knob });
+    this.setState({ appView: { shop, mobi, nav: "reload", form: "no-display", panel: "no-display", print: "no-display" }, knob });
   }
 
   _collectHeight(height){
@@ -88,13 +87,13 @@ export default class AppLogic extends Component {
   _clickCustom(){
     const { bigView, custom, tile } = this.state;
     this.setState({ bigView: "jack", custom: "jill", tile: "jack", restore: { bigView, custom, tile }, customDisplay: true, catClicked: false,
-      appView: {land: "no-display", shop: "", nav: "no-display", form: "no-display", panel: "no-display", print: "no-display", mobi: "no-display"}  
+      appView: {shop: "", nav: "no-display", form: "no-display", panel: "no-display", print: "no-display", mobi: "no-display"}  
     });
   }
 
   _clickBack(){
     this.setState({ bigView: "jack", custom: "jack", tile: "jill", 
-      appView: {land: "no-display", shop: "", nav: "reload", form: "no-display", panel: "no-display", print: "no-display", mobi: "no-display"}
+      appView: {shop: "", nav: "reload", form: "no-display", panel: "no-display", print: "no-display", mobi: "no-display"}
     });
   }
 
@@ -178,7 +177,7 @@ export default class AppLogic extends Component {
   }
 
   _removeFromCart(item){
-    if(item === 'all') return this.setState({ cartItems: [], prevOrder: [], appView: { land: "no-display", 
+    if(item === 'all') return this.setState({ cartItems: [], prevOrder: [], appView: { 
       shop: "", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload" },
       bigView: "jack", custom: "jack", tile: "jill", info:  { customer: { _name: "", email: "", phone: "", 
       address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}
@@ -225,19 +224,19 @@ export default class AppLogic extends Component {
   }
 
   _viewCart(){
-    this.setState({ appView: {land: "no-display", shop: "no-display", mobi: "no-display", form: "no-display", panel: "reload", print: "no-display", nav: "no-display"} });
+    this.setState({ appView: {shop: "no-display", mobi: "no-display", form: "no-display", panel: "reload", print: "no-display", nav: "no-display"} });
   }
 
   _viewShop(){
-    this.setState({ appView: {land: "no-display", shop: "", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload"} });
+    this.setState({ appView: {shop: "", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload"} });
   }
 
   _viewForm(cost){
-    this.setState({ appView: {land: "no-display", shop: "no-display", mobi: "no-display", form: "reload", panel: "no-display", print: "no-display", nav: "no-display"}, cost });
+    this.setState({ appView: {shop: "no-display", mobi: "no-display", form: "reload", panel: "no-display", print: "no-display", nav: "no-display"}, cost });
   }
 
   _viewPrint(){
-    this.setState({ appView: {land: "no-display", shop: "no-display", mobi: "no-display", form: "no-display", panel: "no-display", print: "reload", nav: "no-display"} });
+    this.setState({ appView: {shop: "no-display", mobi: "no-display", form: "no-display", panel: "no-display", print: "reload", nav: "no-display"} });
   }
 
   actions(){
@@ -294,12 +293,24 @@ export default class AppLogic extends Component {
     const actions = this.actions();
     return (
       <div className="app" ref={this._getRef}>  
-      	<Navigator actions={actions} />
-        <MobilePanel actions={actions} />
-      	<ShopArea actions={actions} />
-        <CheckoutPanel actions={actions} />
-        <CheckoutForm actions={actions} />
-        <PrintPage actions={actions} />
+      	{
+          actions.appView.nav === 'no-display' ? null : <Navigator actions={actions} />
+        }
+        {
+          actions.appView.mobi === 'no-display' ? null : <MobilePanel actions={actions} />
+        }
+        {
+          actions.appView.shop === 'no-display' ? null : <ShopArea actions={actions} />
+        }
+        {
+          actions.appView.panel === 'no-display' ? null : <CheckoutPanel actions={actions} />
+        }
+        {
+          actions.appView.form === 'no-display' ? null : <CheckoutForm actions={actions} />
+        }
+        {
+          actions.appView.print === 'no-display' ? null : <PrintPage actions={actions} />
+        }
       </div>
     );
   }

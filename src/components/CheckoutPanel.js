@@ -7,7 +7,7 @@ export default class CheckoutPanel extends Component {
     const inline = { minHeight: actions.height + 20 };
     let total = 0, click = null;
     return (
-      <section className={actions.appView.panel + " checkout-panel"} style={inline}>
+      <section className="checkout-panel" style={inline}>
         <section className="inner-pane">
           <h1 className="checkout-panel">SHOPPING CART</h1>
           <div>

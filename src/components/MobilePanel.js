@@ -51,7 +51,7 @@ export default class MobilePanel extends Component {
     });
     options.push("Show All");
     const filters = [50000, 200000, 500000, 1000000];
-    const className = `${actions.appView.mobi} mobile-panel`;
+    const className = `mobile-panel`;
     const inline = { minHeight: actions.height }
     const shop = actions.knob ? "shop-items" : "shop-items no-display";
     const filter = actions.knob ? "filter-items no-display" : "filter-items";

@@ -73,7 +73,7 @@ export default class CheckoutForm extends Component {
 		]
 		const inline = { minHeight: actions.height + 20 }
   	return (
-      <section className={actions.appView.form + " checkout-form"} style={ inline }>
+      <section className="checkout-form" style={ inline }>
         <section className="inner-pane">
         	<h1 className="checkout-form">CLIENT INFORMATION</h1>
         	<DynamicForm

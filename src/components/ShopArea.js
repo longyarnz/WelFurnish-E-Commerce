@@ -17,7 +17,7 @@ export default class ShopArea extends Component {
   render() {
     const actions = this.actions();
     return (
-      <section className={actions.actions.appView.shop + " shop-area"}>
+      <section className="shop-area">
       	<SidePanel actions={actions} />
         <CartPanel actions={actions} />
         <CheckoutButton actions={actions} />
