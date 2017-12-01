@@ -45,7 +45,7 @@ export default class App extends Component {
     this.setState({ display });
   }
 
-  actions(){
+  actions(){ 
     return {
      	getScreenHeight: this._collectScreenHeight,
      	viewShop: this._viewShop

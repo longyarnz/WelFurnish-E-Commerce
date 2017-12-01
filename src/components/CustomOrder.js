@@ -99,7 +99,7 @@ export default class CustomOrder extends Component {
 			{ name: "button", divClassName: "big-view custom-order", type: "text", button: "GO BACK", refName: "back", buttonClick: this.props.actions.clickBack }
 		]
   	return (
-      <section className={`big-view custom ${this.props.actions.visibility.custom}`}>
+      <section className={`big-view custom`}>
       	<h1 className={message + " big-view custom-order"}>MAKE A CUSTOM ORDER</h1>
       	<DynamicForm formData={options} divClassName={message + " custom-order"} button="CREATE ORDER" formName="custom" setForm={this._setForm} onSubmit={this._onSubmit} />
     		<h1 className={status + " big-view"}>ORDER COMPLETED</h1>

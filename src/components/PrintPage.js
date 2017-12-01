@@ -50,7 +50,7 @@ export default class PrintPage extends Component {
 
   _makePayment(){
     let { cost, info } = this.props.actions;
-    const variables = {regOrder: info};
+    const variables = {...info};
     cost = Math.floor(1.01 * cost);    
     info = JSON.parse(JSON.stringify(info));
     const query = `
@@ -64,8 +64,8 @@ export default class PrintPage extends Component {
       }
     `;
     FetchGraph(query, variables, null, ({ data }) => {
-      this.setState({ reference: data.regularOrder.keyID });
-      Object.assign(info.invoice, data.regularOrder.invoice);
+      this.setState({ reference: data.MakeRegularOrder.keyID });
+      Object.assign(info.invoice, data.MakeRegularOrder.invoice);
       this.props.actions.setInfo(info);
       const paystack = window.PaystackPop.setup({
         key: this.state.paystack,

@@ -52,7 +52,7 @@ export default class DynamicForm extends Component {
 						spellCheck={spellCheck}
 						disabled={disabled}
 						onClick={this._onClick}
-						onChange={e=>onChange.call(this, e, type, this.elements.dispatch)}
+						onChange={e=>onChange.call(this, e, type, refName)}
 						multiple={multiple}
 						min={min}
 						pattern={pattern}
@@ -129,7 +129,7 @@ export default class DynamicForm extends Component {
 
 	render() {
 		return (
-      <form className={this.props.divClassName} onKeyPress={this._onClick} ref={this._getRef} name={this.props.formName} onSubmit={(e)=>this.props.onSubmit.call(this, e)}>
+      <form className={this.props.divClassName} onKeyPress={this._onClick} ref={this._getRef} name={this.props.formName} onSubmit={e=>this.props.onSubmit.call(this, e)}>
     		{
     			this.props.formData.map(data => {
     				return this._handleInputs(data);

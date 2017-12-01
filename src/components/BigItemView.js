@@ -13,14 +13,14 @@ export default class BigItemView extends Component {
     this.state = { 	qty: 0, cost: 0, text: "", clicked: false }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(!nextProps.actions.item) return;
-    const { prevOrder, cart, item } = nextProps.actions;
-    const order = cart.findIndex(({ keyID })=>item.keyID === keyID);
+  componentDidMount() {
+    const { prevOrder, cart, item } = this.props.actions;
+    const order = cart.findIndex(({ keyID }) => item.keyID === keyID);
     const qty = order > -1 ? prevOrder[order].qty : 1;
     const clicked = order > -1 ? true : false;
+    if(clicked) console.log("Clicked");
     this.textInput.value = clicked ? qty : "";
-    this._change({ target: {value:qty}}, item.price);
+    this._change({ target: { value:qty }}, item.price);
     this.setState({ clicked });
   }
 
@@ -30,7 +30,7 @@ export default class BigItemView extends Component {
 		const qty = isNaN(parse) || parse === 0 ? 1 : parse;
     const cost = this.props.actions.reNumber(parseInt(price, 0) * qty);
 		const text = ` × ${qty} = ₦ ${cost}`;
-    this.setState(e=>({ text, qty, cost })); 
+    this.setState({ text, qty, cost }); 
 	}
 
   _clickBack(){
@@ -68,7 +68,7 @@ export default class BigItemView extends Component {
     const small = this.state.clicked;
     const button = small ? "REMOVE FROM CART" : "ADD TO CART";
     return (
-      <section className={`big-view ${this.props.actions.visibility.big}`} style={inline}>
+      <section className={`big-view`} style={inline}>
         <h1 className="big-view caption">{title}</h1>
         <span className="back" onClick={this.props.actions.clickBack}>GO BACK</span>
         <Image sources={sources} imgClass="gallery" />

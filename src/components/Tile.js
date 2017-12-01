@@ -1,11 +1,10 @@
 import React from 'react';
 
 export default function Tile(props) {
-  const { src, title, desc, figure, pat, display, reNumber } = props;
-  const text = display + figure + pat;
+  const { src, title, desc, reNumber } = props;
   let { price } = props; price = reNumber(price);
   return (
-    <figure className={text} onClick={props.onClick}>
+    <figure onClick={props.onClick}>
       <img className="" src={src} alt="" />
       <figcaption>
         {title} <br />

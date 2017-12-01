@@ -11,7 +11,6 @@
 // }
 import UploadFileMethod from '../UploadFileMethod';
 export default (query, variables, uploadables, responseHandler, progress) => {
-	console.log(uploadables);
 	let data = JSON.stringify({ query, variables });
 	if(uploadables) UploadFileMethod(uploadables);
 	return new Promise((resolve, reject) => {
@@ -22,7 +21,6 @@ export default (query, variables, uploadables, responseHandler, progress) => {
 		ajax.onprogress = progress;
 		ajax.onreadystatechange = () => {
 			if(ajax.readyState === 4 && ajax.status === 200) {
-				// console.log(ajax.responseText);
 				data = JSON.parse(ajax.responseText);
 				resolve(responseHandler(data));
 			}

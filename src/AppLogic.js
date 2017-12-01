@@ -41,8 +41,8 @@ export default class AppLogic extends Component {
       counter: 0, totalPage, cartItems: [], height: 0, keyID: 1, prevOrder: [], display: [], knob: "", loadMore: false, noItem: false,
       dataList: [], figure: "Show All", price: Infinity , customDisplay: false, newTotal: 0, catClicked: false,  hasMore: true,
       tile: "jill", restore: { bigView: "jack", custom: "jack", tile: "jill" }, bigView: "jack", custom: "jack", screenHeight: 0, cost: 0,
-      appView: {land: "reload", shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "Lekan", 
-      email: "mail@mail.com", phone: 8082935102, address: "OAU, Ile-ife", city: "Osun"}, invoice: {invoice_number: 0, items: "", cost: 0, 
+      appView: {land: "reload", shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", 
+      email: "", phone: "", address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, 
       userKeyID: "0000" }}, 
     }
   }
@@ -147,32 +147,25 @@ export default class AppLogic extends Component {
   }
 
   _reArrangeData(figure, price){
-    let { dataList } = this.state, counter = 0,
-    totalPage = 0, newData = [], oldData = [];
+    let counter = 0,
+    totalPage = 0, Data = [];
     if(figure === "Show All"){
       this.props.items.forEach(item=>{
-        if(item.price < price) {
-          oldData.push(item);
-        }
-        else newData.push(item);
+        if(item.price < price) Data.push(item);
       });
     }
     else{
-      dataList.forEach(item=>{
+      this.props.items.forEach(item => {
         if(item.price < price & item.sub === figure || figure === 'Show All' & item.price < price){
-          oldData.push(item);
-        }
-        else {
-          newData.push(item);
+          Data.push(item);
         }
       });
     }
-    newData = oldData.concat(newData);
-    counter = oldData.length;
+    counter = Data.length;
     totalPage = this.laptop ? Math.ceil(counter / 6) : Math.ceil(counter / 4);
     totalPage = totalPage === 0 ? 1 : totalPage;
     const noItem = counter === 0 ? true : false;
-    this.setState({ figure, price, catClicked: true, counter: 0, totalPage, dataList: newData, customDisplay: false, newTotal: counter, noItem });
+    this.setState({ figure, price, catClicked: true, counter: 0, totalPage, dataList: Data, customDisplay: false, newTotal: counter, noItem });
     this._structure(0, totalPage);
   }
 
@@ -187,7 +180,8 @@ export default class AppLogic extends Component {
   _removeFromCart(item){
     if(item === 'all') return this.setState({ cartItems: [], prevOrder: [], appView: { land: "no-display", 
       shop: "", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload" },
-      bigView: "jack", custom: "jack", tile: "jill"
+      bigView: "jack", custom: "jack", tile: "jill", info:  { customer: { _name: "", email: "", phone: "", 
+      address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}
     });
     const { cartItems, prevOrder } = this.state;
     const findItem = cartItems.indexOf(item);

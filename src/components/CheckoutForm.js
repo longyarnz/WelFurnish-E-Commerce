@@ -18,18 +18,18 @@ export default class CheckoutForm extends Component {
   _onSubmit(e){
     e.preventDefault();
     let { cart, info } = this.props.actions;
-    cart = cart.map(item=>" "+item.title);
+    cart = cart.map(item => " " + item.title);
     cart = cart.toString().trim();
     const { checkout } = this.elements;
     const formValues = [];
     for(let i = 0; i < 5; i++) formValues.push(checkout[i].value);
-    const check = formValues.every(value=>value !== "");
+    const check = formValues.every(value => value !== "");
     if(check ) {
       info = {
         customer : {
           _name: formValues[0],
           email: formValues[1],
-          phone: formValues[2],
+          phone: parseInt(formValues[2], 0),
           address: formValues[3],
           city: formValues[4],
         },
@@ -40,9 +40,20 @@ export default class CheckoutForm extends Component {
         }
       }
       const { _name, phone, address, city } = info.customer;
+      console.log(info);
       this.props.actions.setInfo(info);
       this.props.actions.viewPrint();
       this.setState({ restore: { _name, phone, address, city } });
+    }
+  }
+
+  _handleInput(e, type, ref){
+    e.persist();
+    const { target } = e;
+    if (type === 'number' && ref === 'phone'){
+      let value = parseInt(target.value.substr(0, 3), 0);
+      value = value === 234 ? e.target.value : parseInt((234+""+target.value), 0);
+      e.target.value = value;
     }
   }
 
@@ -52,7 +63,10 @@ export default class CheckoutForm extends Component {
     const options = [
 			{ name: "input", divClassName: "checkout-form", type: "text", placeholder: "What is your name?", refName: "_name", required },
       { name: "input", divClassName: "checkout-form", type: "text", placeholder: "What is your email address?", refName: "email", required },
-			{ name: "input", divClassName: "checkout-form", type: "number", maxLength: 11, placeholder: "What is your phone number (234××××××××××) ?", pattern: "[0-9]*", refName: "phone", required },
+			{ 
+        name: "input", divClassName: "checkout-form", type: "number", maxLength: 11, onChange: this._handleInput,
+        placeholder: "What is your phone number (234××××××××××) ?", pattern: "[0-9]*", refName: "phone", required 
+      },
 			{ name: "textArea", divClassName: "checkout-form", type: "text", placeholder: "What is your delivery address?", refName: "address", required },
       { name: "input", divClassName: "checkout-form", type: "text", placeholder: "What is your city of delivery?", refName: "city", required },
 			{ name: "button", divClassName: (actions.cost > 0 ? "checkout-form" : "no-display"), type: "button", refName: "back", button: "GO BACK", buttonClick: actions.viewCart }

@@ -47,9 +47,15 @@ export default class CartPanel extends Component {
     const inline = { minHeight: this.props.actions.height }
     return (
       <aside className="cart-panel" style={inline}>
-        <BigItemView actions={actions} />
-        <CustomOrder actions={actions} />
-        <TileSection actions={actions} />
+        {
+          actions.visibility.big === 'jill' ? <BigItemView actions={actions} /> : null
+        }
+        {
+          actions.visibility.custom === 'jill' ? <CustomOrder actions={actions} /> : null
+        }
+        {
+          actions.visibility.tile === 'jill' ? <TileSection actions={actions} /> : null
+        }
       </aside>
     );
   }

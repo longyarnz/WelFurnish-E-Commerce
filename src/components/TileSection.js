@@ -20,10 +20,11 @@ export default class TilesSection extends Component {
 			loadMore: actions.loadMore, 
 			touch: actions.touch,
 			noItem: actions.noItem,
-			hasMore: actions.hasMore
+			hasMore: actions.hasMore,
+			page: currentPage
 		}
 		return (
-      <section className={`cart-section ${this.props.actions.visibility.tile}`}>
+      <section className={`cart-section`}>
       	<Paginator currentPage={currentPage} totalPage={totalPage} onClick={changePage} press={this.props.actions.goToPage} arrow={this.props.actions.arrow} />
 	    	<TilesContainer actions={actions} />
 	    </section>

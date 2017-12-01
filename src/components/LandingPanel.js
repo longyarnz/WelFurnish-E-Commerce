@@ -9,20 +9,6 @@ export default class LandingPanel extends Component {
     this.state = { height: window.screen.availHeight - 80 }
   }
 
-  componentDidMount() {
-    let resizeTimeout, height;
-    window.addEventListener("resize", e => {
-      if (!resizeTimeout) {
-        resizeTimeout = setTimeout(e=>{
-          resizeTimeout = null;
-          height = window.screen.availHeight - 80;
-          this.setState({ height });
-        }, 66);
-      }      
-    });
-    this.props.actions.getScreenHeight(height);
-  }
-
   _click(){
     this.props.actions.viewShop(true);
   }
@@ -32,7 +18,7 @@ export default class LandingPanel extends Component {
     const inline = { height }
     const iconArray = ["fa-facebook", "fa-twitter", "fa-instagram"];
     return (
-      <section ref="land" className="landing-panel" style={inline} >
+      <section className="landing-panel" style={inline} >
         <div className="dk-bg">
           <header className="landing-panel">
             <img src={Logo} alt="WelFurnish" />
