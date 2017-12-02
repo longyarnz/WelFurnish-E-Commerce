@@ -17,6 +17,4 @@ yarn-debug.log*
 yarn-error.log*
 /php
 /graphiql
-/data
-src/data
 /src/subscriptions
