@@ -11,16 +11,17 @@ export default class DynamicList extends Component {
 
 	componentWillReceiveProps(nextProps) {
 	  this.inspect = nextProps.selectClass === "select-button";
+	  if (!this.inspect) return;
 	  const display = this.state.display;
     display.fill("");
     this.setState({ display });
 	}
 
 	componentWillMount() {
-		this.inspect = this.props.selectClass !== "no-display";
+		this.inspect = this.props.selectClass === "select-button";
 		const number = this.props.list.length;
-		const display = new Array(number).fill("");
-		const select = new Array(number).fill(" off");
+		const display = !this.props.cat ? new Array(number).fill("") : this.props.cat;
+		const select = !this.props.filter ? new Array(number).fill(" off") : this.props.filter;
 		this.setState({ display, select });
 	}
 
@@ -30,6 +31,7 @@ export default class DynamicList extends Component {
     display.fill("");
     display[i] = this.inspect ? "" : "clicked";
     this.setState({ display });
+    !this.inspect && this.props.setCat({ display });
     if(this.inspect){
       const odd = this.state.select[i] === " off" ? " on" : " off";
       const select = this.state.select;
@@ -40,6 +42,7 @@ export default class DynamicList extends Component {
       else if(odd === " off" && this.props.price) this.props.price(Infinity);
       if(odd === " on" && this.props.figure) this.props.figure(item);
       else if(odd === " off" && this.props.figure) this.props.figure('Show All');
+      this.props.setFilter(select);
     }
     this.props.figure && this.props.figure(item);
   }

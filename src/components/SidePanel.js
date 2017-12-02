@@ -50,10 +50,14 @@ export default class SidePanel extends Component {
     return (
       <aside className="side-panel" style={inline}>
         <h3 className="side-panel">{`${this.state.title} ${this.state.item}`}</h3>
-      	<DynamicList list={this.state.options} back={this._getCategory} figure={this.state.figure} listClass={this.state.listClass} />
+      	<DynamicList list={this.state.options} back={this._getCategory} figure={this.state.figure} 
+          setCat={actions.setCat} cat={actions.ctgy} listClass={this.state.listClass}
+        />
         <button className="side-panel" onClick={actions.custom}>MAKE A CUSTOM ORDER</button>
         <h3 className="side-panel">FILTER</h3>
-        <DynamicList list={filters} selectClass="select-button" reArrange={true} price={actions.setPrice} listClass="filter-items" />
+        <DynamicList list={filters} selectClass="select-button" reArrange={true} filter={actions.filter}
+          price={actions.setPrice} setFilter={actions.setFilter} listClass="filter-items"
+        />
         <CartButton number={actions.cart.length} onClick={actions.viewCart} />
       </aside>
     );

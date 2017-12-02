@@ -11,13 +11,15 @@ export default class AppLogic extends Component {
     super(props);
     this.actions = this.actions.bind(this);
     this._getRef = this._getRef.bind(this);
+    this._setCat = this._setCat.bind(this);
     this._onTouch = this._onTouch.bind(this);
     this._setPage = this._setPage.bind(this);
     this._paginate = this._paginate.bind(this);
     this._viewCart = this._viewCart.bind(this);
     this._viewForm = this._viewForm.bind(this);
     this._viewShop = this._viewShop.bind(this);
-    this._setPrice = this._setPrice.bind(this);  
+    this._setPrice = this._setPrice.bind(this); 
+    this._setFilter = this._setFilter.bind(this);  
     this._viewPrint = this._viewPrint.bind(this);  
     this._addToCart = this._addToCart.bind(this);
     this._setFigure = this._setFigure.bind(this);
@@ -41,8 +43,8 @@ export default class AppLogic extends Component {
       counter: 0, totalPage, cartItems: [], height: 0, keyID: 1, prevOrder: [], display: [], knob: "", loadMore: false, noItem: false,
       dataList: [], figure: "Show All", price: Infinity , customDisplay: false, newTotal: 0, catClicked: false,  hasMore: true,
       tile: "jill", restore: { bigView: "jack", custom: "jack", tile: "jill" }, bigView: "jack", custom: "jack", screenHeight: 0, cost: 0,
-      appView: {shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", 
-      email: "", phone: "", address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}, 
+      appView: {shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", email: "", phone: "", 
+      address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}, filter: null, cat: null
     }
   }
 
@@ -203,6 +205,14 @@ export default class AppLogic extends Component {
     }
   }
 
+  _setCat(cat){
+    this.setState({ cat });
+  }
+
+  _setFilter(filter){
+    this.setState({ filter });
+  }
+
   _setClientInfo(info){
     this.setState({ info });
   }
@@ -267,8 +277,12 @@ export default class AppLogic extends Component {
       price: this.state.price,
       knob: this.state.knob,
       loadMore: this.state.loadMore,
+      ctgy: this.state.cat,
+      setCat: this._setCat,
+      filter: this.state.filter,
       setFigure: this._setFigure,
       setPrice: this._setPrice,
+      setFilter: this._setFilter,
       setPage: this._setPage,
       setInfo: this._setClientInfo,
       total: this.state.newTotal,
