@@ -43,7 +43,7 @@ export default class AppLogic extends Component {
       counter: 0, totalPage, cartItems: [], height: 0, keyID: 1, prevOrder: [], display: [], knob: "", loadMore: false, noItem: false,
       dataList: [], figure: "Show All", price: Infinity , customDisplay: false, newTotal: 0, catClicked: false,  hasMore: true,
       tile: "jill", restore: { bigView: "jack", custom: "jack", tile: "jill" }, bigView: "jack", custom: "jack", screenHeight: 0, cost: 0,
-      appView: {shop: "", nav, form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", email: "", phone: "", 
+      appView: {shop: "reload", nav: "reload", form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", email: "", phone: "", 
       address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}, filter: null, cat: null
     }
   }
@@ -238,7 +238,7 @@ export default class AppLogic extends Component {
   }
 
   _viewShop(){
-    this.setState({ appView: {shop: "", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload"} });
+    this.setState({ appView: {shop: "reload", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload"} });
   }
 
   _viewForm(cost){
