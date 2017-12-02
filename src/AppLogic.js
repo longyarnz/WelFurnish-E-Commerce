@@ -238,7 +238,7 @@ export default class AppLogic extends Component {
   }
 
   _viewShop(){
-    this.setState({ appView: {shop: "reload", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload"} });
+    this.setState({ appView: {shop: "", mobi: "no-display", form: "no-display", panel: "no-display", print: "no-display", nav: "reload"} });
   }
 
   _viewForm(cost){
