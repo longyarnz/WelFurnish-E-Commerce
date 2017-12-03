@@ -15,20 +15,23 @@ export default class MobilePanel extends Component {
     this.setState({figure: this._getSubs});
   }
 
-  _getSubs(category){
+  _getSubs(category, item){
     let options = [];
+    item = item ? item : "";
     const { actions } = this.props;
-    if(category === "Show All") return this._interceptItem(category);
-    actions.rawData.forEach(item=>{
+    if(category === "Show All" || category === "CATEGORIES") return this._interceptItem(category);
+    actions.rawData.forEach(item => {
       if(item.category === category && options.indexOf(item.sub) < 0) options.push(item.sub);
       else if(category === "Go Back" && options.indexOf(item.sub) < 0) return this._getCategory();
     });
     options.push("Go Back");
-    this.setState({ options, figure: this._interceptItem, title: category, item: "", listClass: "shop-items reload" });
+    this.setState({ options, figure: this._interceptItem, title: category, item, listClass: "shop-items reload" });
   }
 
-  _getCategory(){
+  _getCategory(ctgy){
     const { actions } = this.props;
+    if (ctgy) return this._getSubs(ctgy[0], ctgy[1]);
+    if (actions.rawData.length === 0) return;
     let options = [];
     actions.rawData.forEach(({ category })=>{
       options.indexOf(category) < 0 && options.push(category);
@@ -38,9 +41,9 @@ export default class MobilePanel extends Component {
   }
 
   _interceptItem(item){
+    item = item === "CATEGORIES" ? "Show All" : item;
     item === "Show All" ? this.setState({title: "CATEGORY", item: ""}) : this.setState({ item: "/ "+item });
-    this.props.actions.shop("", "no-display", true);
-    this.props.actions.setFigure(item);
+    this.props.actions.actions.setFigure(item);
   }
 
   render() {
@@ -58,7 +61,7 @@ export default class MobilePanel extends Component {
     return (
       <section className={className} style={inline}>
         <DynamicList list={this.state.options} back={this._getCategory} figure={this.state.figure} listClass={shop} />
-        <DynamicList list={filters} selectClass="select-button" reArrange={true} price={actions.setPrice} listClass={filter} />
+        <DynamicList list={filters} selectClass="select-button" filter={actions.filter} setFilter={actions.setFilter} reArrange={true} price={actions.setPrice} listClass={filter} />
         <button className="mobile-panel" onClick={actions.custom}>MAKE A CUSTOM ORDER</button>
         <button className="mobile-panel" onClick={()=>actions.shop("", "no-display", true)}>BACK TO SHOP</button>
       </section>
