@@ -3,7 +3,6 @@ import GraphHTTP from 'express-graphql';
 import Models from './models';
 import typeDefs from './schema';
 import resolvers from './resolvers';
-// import Schema from './mongo-schema';
 import multer from 'multer';
 import { makeExecutableSchema } from 'graphql-tools';
 import ClearConsole from 'react-dev-utils/clearConsole';

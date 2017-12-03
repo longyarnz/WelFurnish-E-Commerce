@@ -11,25 +11,35 @@ export default class SidePanel extends Component {
     this.state = { figure: ()=>{}, options: [], title: "CATEGORIES", listClass: "shop-items", item: "" }
   }
 
-  componentWillMount() {
-    this._getCategory();
-    this.setState({figure: this._getSubs});
+  componentWillReceiveProps() {
+    if (this.state.options.length === 0) this._getCategory();
   }
 
-  _getSubs(category){
+  componentWillMount() {
+    this._getCategory(this.props.actions.actions.ctgy);
+  }
+
+  componentWillUnmount() {
+    this.props.actions.actions.setCat([this.state.title, this.state.item]);
+  }
+
+  _getSubs(category, item){
     let options = [];
+    item = item ? item : "";
     const { actions } = this.props.actions;
-    if(category === "Show All") return this._interceptItem(category);
-    actions.rawData.forEach(item=>{
+    if(category === "Show All" || category === "CATEGORIES") return this._interceptItem(category);
+    actions.rawData.forEach(item => {
       if(item.category === category && options.indexOf(item.sub) < 0) options.push(item.sub);
       else if(category === "Go Back" && options.indexOf(item.sub) < 0) return this._getCategory();
     });
     options.push("Go Back");
-    this.setState({ options, figure: this._interceptItem, title: category, item: "", listClass: "shop-items reload" });
+    this.setState({ options, figure: this._interceptItem, title: category, item, listClass: "shop-items reload" });
   }
 
-  _getCategory(){
+  _getCategory(ctgy){
     const { actions } = this.props.actions;
+    if (ctgy) return this._getSubs(ctgy[0], ctgy[1]);
+    if (actions.rawData.length === 0) return;
     let options = [];
     actions.rawData.forEach(({ category })=>{
       options.indexOf(category) < 0 && options.push(category);
@@ -39,6 +49,7 @@ export default class SidePanel extends Component {
   }
 
   _interceptItem(item){
+    item = item === "CATEGORIES" ? "Show All" : item;
     item === "Show All" ? this.setState({title: "CATEGORY", item: ""}) : this.setState({ item: "/ "+item });
     this.props.actions.actions.setFigure(item);
   }

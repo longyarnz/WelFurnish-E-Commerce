@@ -38,13 +38,12 @@ export default class AppLogic extends Component {
     this.laptop = window.innerWidth > 1024;
     this.tablet = window.innerWidth > 767 && window.innerWidth <= 1024;
     const nav = "no-display";
-    const totalPage = Math.ceil(this.props.items.length / 6);
     this.state = { 
-      counter: 0, totalPage, cartItems: [], height: 0, keyID: 1, prevOrder: [], display: [], knob: "", loadMore: false, noItem: false,
+      counter: 0, totalPage: 0, cartItems: [], height: 0, keyID: 1, prevOrder: [], knob: "", loadMore: false, noItem: false,
       dataList: [], figure: "Show All", price: Infinity , customDisplay: false, newTotal: 0, catClicked: false,  hasMore: true,
       tile: "jill", restore: { bigView: "jack", custom: "jack", tile: "jill" }, bigView: "jack", custom: "jack", screenHeight: 0, cost: 0,
       appView: {shop: "reload", nav: "reload", form: nav, panel: nav, print: nav, mobi: nav}, info:  { customer: { _name: "", email: "", phone: "", 
-      address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}, filter: null, cat: null
+      address: "", city: ""}, invoice: {invoice_number: 0, items: "", cost: 0, userKeyID: "0000" }}, filter: null, cat: null, items: []
     }
   }
 
@@ -55,8 +54,13 @@ export default class AppLogic extends Component {
     this.setState({cartItems, prevOrder });
   }
 
-  componentWillMount() {
+  async componentWillReceiveProps({ items }) {
+    await this.setState({ items });
     this._reArrangeData(this.state.figure, this.state.price);
+  }
+
+  componentWillMount() {
+    this.componentWillReceiveProps(this.props);
   }
 
   componentDidMount() {
@@ -64,7 +68,6 @@ export default class AppLogic extends Component {
       this.mobile = window.innerWidth <= 767;
       this.laptop = window.innerWidth > 1024;
       this.tablet = window.innerWidth > 767 && window.innerWidth <= 1024;
-      this._structure(this.state.counter, this.state.totalPage);      
     }, true);
   }
 
@@ -110,7 +113,6 @@ export default class AppLogic extends Component {
     if(isNaN(parseInt(value, 0))) {
       e.target.value = ""; value = "";
       e.target.placeholder = "Type a number";
-      this._structure(this.state.counter, this.state.totalPage);
     }
     else{
       value = Math.floor(parseInt(value, 0)) - 1;
@@ -118,12 +120,11 @@ export default class AppLogic extends Component {
       if(which === 13 & value < this.state.totalPage) {
         e.target.value = "";
         e.target.placeholder = "Go to page...";
-        this._structure(value, this.state.totalPage);
+        this.setState({ counter: value });
       }
       else if(which === 13 & value >= this.state.totalPage){
         e.target.value = ""; value = "";
         e.target.placeholder = "Out of range";
-        this._structure(this.state.counter, this.state.totalPage);
       }
     }
   }
@@ -149,25 +150,24 @@ export default class AppLogic extends Component {
 
   _reArrangeData(figure, price){
     let counter = 0,
-    totalPage = 0, Data = [];
+    totalPage = 0, dataList = [];
     if(figure === "Show All"){
-      this.props.items.forEach(item=>{
-        if(item.price < price) Data.push(item);
+      this.state.items.forEach(item => {
+        if(item.price < price) dataList.push(item);
       });
     }
     else{
-      this.props.items.forEach(item => {
+      this.state.items.forEach(item => {
         if(item.price < price & item.sub === figure || figure === 'Show All' & item.price < price){
-          Data.push(item);
+          dataList.push(item);
         }
       });
     }
-    counter = Data.length;
+    counter = dataList.length;
     totalPage = this.laptop ? Math.ceil(counter / 6) : Math.ceil(counter / 4);
     totalPage = totalPage === 0 ? 1 : totalPage;
     const noItem = counter === 0 ? true : false;
-    this.setState({ figure, price, catClicked: true, counter: 0, totalPage, dataList: Data, customDisplay: false, newTotal: counter, noItem });
-    this._structure(0, totalPage);
+    this.setState({ figure, price, catClicked: true, counter: 0, totalPage, dataList, customDisplay: false, newTotal: counter, noItem });
   }
 
   _reArrangeMoney(number){
@@ -193,7 +193,7 @@ export default class AppLogic extends Component {
 
   _structure(counter, totalPage, figure){
     if(counter < totalPage){ 
-      const display = new Array(this.props.items.length).fill(" no-display ");
+      const display = new Array(this.state.items.length).fill(" no-display ");
       if(this.laptop){
         for (let i = 0; i < 6; i++){
           const count =  counter * 6 + i;
@@ -291,7 +291,7 @@ export default class AppLogic extends Component {
       paginate: this._paginate,
       back: this._clickBack,
       touch: this._onTouch,
-      rawData: this.props.items,
+      rawData: this.state.items,
       viewCart: this._viewCart,
       viewForm: this._viewForm,
       viewShop: this._viewShop,

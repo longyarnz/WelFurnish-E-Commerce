@@ -1,7 +1,4 @@
 {
-  "plugins": [
-    "relay"
-  ],
   "presets": [
     "react-app"
   ]

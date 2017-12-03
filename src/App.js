@@ -7,6 +7,7 @@ export default class App extends Component {
 	constructor(props){
     super(props);
     this.actions = this.actions.bind(this);
+    this._fetchItems = this._fetchItems.bind(this);
     this._viewShop = this._viewShop.bind(this);
 		this._collectScreenHeight = this._collectScreenHeight.bind(this);
 		this.state = { display: false, screenHeight: 'auto', items: [] }
@@ -14,6 +15,10 @@ export default class App extends Component {
 
 	componentDidCatch(error, info) {
     console.log(error, info);
+  }
+
+  _fetchItems({ data }){
+  	this.setState({ items: data.items });
   }
 
   componentWillMount() {
@@ -32,9 +37,7 @@ export default class App extends Component {
 			  }
 			}
     `;
-    FetchGraph(query, {}, null, ({ data }) => {
-    	this.setState({ items: data.items });
-    })
+    FetchGraph(query, {}, null, this._fetchItems);
   }
 
   _collectScreenHeight(screenHeight){

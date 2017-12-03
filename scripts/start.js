@@ -5,23 +5,9 @@ process.env.NODE_ENV = 'development';
 // This is where the Database is hosted.
 // The Graphql Server is also hosted here.
 
-// import Exp from 'express';
-// import GraphHTTP from 'express-graphql';
-// import Schema from '../data/schema';
-// import cors from 'cors';
-var openBrowser = require('react-dev-utils/openBrowser');
-
-// const GraphqlPort = 8080;
-// const App = Exp();
-// App.use("/", cors(), GraphHTTP({
-//   pretty: true,
-//   graphiql: true,
-//   schema: Schema
-// }));
-// App.listen(GraphqlPort, ()=> console.log(`APP is running on ${GraphqlPort}`));
+import server from '../data/server';
 
 require('dotenv').config({silent: true});
-
 var chalk = require('chalk');
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
@@ -36,7 +22,7 @@ var prompt = require('react-dev-utils/prompt');
 var fs = require('fs');
 var config = require('../config/webpack.config.dev');
 var paths = require('../config/paths');
-
+var openBrowser = require('react-dev-utils/openBrowser');
 var useYarn = fs.existsSync(paths.yarnLockFile);
 var cli = useYarn ? 'yarn' : 'npm';
 var isInteractive = process.stdout.isTTY;

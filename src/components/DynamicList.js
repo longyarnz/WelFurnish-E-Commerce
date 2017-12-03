@@ -12,7 +12,7 @@ export default class DynamicList extends Component {
 	componentWillReceiveProps(nextProps) {
 	  this.inspect = nextProps.selectClass === "select-button";
 	  if (!this.inspect) return;
-	  const display = this.state.display;
+	  const { display } = this.state;
     display.fill("");
     this.setState({ display });
 	}
@@ -20,18 +20,20 @@ export default class DynamicList extends Component {
 	componentWillMount() {
 		this.inspect = this.props.selectClass === "select-button";
 		const number = this.props.list.length;
-		const display = !this.props.cat ? new Array(number).fill("") : this.props.cat;
+		const display = new Array(number).fill("");
 		const select = !this.props.filter ? new Array(number).fill(" off") : this.props.filter;
 		this.setState({ display, select });
 	}
 
 	_handleClick(i, item){
-		if(item === "Go Back") return this.props.back();
-		const display = this.state.display;
+		const { display } = this.state;
     display.fill("");
-    display[i] = this.inspect ? "" : "clicked";
+		if(item === "Go Back") {
+			this.setState({ display });
+			return this.props.back();
+		}		
+    display[i] = this.props.listClass === "shop-items" ? "" : "clicked";
     this.setState({ display });
-    !this.inspect && this.props.setCat({ display });
     if(this.inspect){
       const odd = this.state.select[i] === " off" ? " on" : " off";
       const select = this.state.select;
