@@ -37,7 +37,7 @@ export default class CustomOrder extends Component {
 				}
 			}
 			uploadedFiles.pop();
-			name.textContent = uploadedFiles;
+			this.elements.dispatch.textContent = uploadedFiles;
 		}
 	}
 
