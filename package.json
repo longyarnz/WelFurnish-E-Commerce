@@ -8,6 +8,7 @@
     "@types/express-serve-static-core": "^4.0.49",
     "ajv": "^5.2.1",
     "ajv-keywords": "^2.1.0",
+    "babel-cli": "^6.24.1",
     "body-parser": "^1.18.1",
     "data-types": "^1.0.4",
     "express-graphql": "^0.6.7",
