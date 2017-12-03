@@ -43,7 +43,7 @@ export default class MobilePanel extends Component {
   _interceptItem(item){
     item = item === "CATEGORIES" ? "Show All" : item;
     item === "Show All" ? this.setState({title: "CATEGORY", item: ""}) : this.setState({ item: "/ "+item });
-    this.props.actions.actions.setFigure(item);
+    this.props.actions.setFigure(item);
   }
 
   render() {
