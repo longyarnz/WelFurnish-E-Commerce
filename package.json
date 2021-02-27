@@ -20,7 +20,7 @@
     "nodemon": "^1.12.1",
     "react": "16",
     "react-dom": "16",
-    "serve": "^6.0.0",
+    "serve": "^10.1.2",
     "watchman": "^0.1.8"
   },
   "devDependencies": {
